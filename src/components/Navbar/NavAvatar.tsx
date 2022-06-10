@@ -1,0 +1,19 @@
+import React from "react"
+
+const NavAvatar: React.FunctionComponent = () => {
+	return (
+    <img
+      src="http://s4.music.126.net/style/web2/img/default/default_avatar.jpg?param=60y60"
+      alt="avatar"
+      className="
+        h-[30px]
+        ml-3
+        rounded-full
+        cursor-pointer
+        hover:brightness-[80%]
+      "
+    />
+	)
+}
+
+export default NavAvatar

@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;700&display=swap');
+
+:root {
+  --color-body-bg: #222;
+  --color-text: #fff;
+  --color-secondary-bg-for-transparent: hsla(0,0%,100%,0.08);
+  --color-primary-bg-for-transparent: hsla(0,0%,100%,0.12);
+  --color-navbar-bg: rgba(34,34,34,0.86);
+}
+
+body {
+  background-color: var(--color-body-bg);
+  font-family: 'Barlow', sans-serif;
+}
+
+.arrow-nav-button__left-right {
+  @apply p-2 m-1 hover:bg-[color:var(--color-secondary-bg-for-transparent)] rounded-md hover:duration-200
+}
