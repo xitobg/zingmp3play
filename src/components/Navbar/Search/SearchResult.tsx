@@ -1,6 +1,6 @@
 import React from "react"
 
-const SearchResult: React.FunctionComponent = () => {
+const SearchResult: React.FC = () => {
   return (
       <>
       </>

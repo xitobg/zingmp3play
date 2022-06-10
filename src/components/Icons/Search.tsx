@@ -6,7 +6,7 @@ interface SvgProps {
   setHeight: string
 }
 
-const Search: React.FunctionComponent<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers }) => {
+const Search: React.FC<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -5,7 +5,7 @@ import NavButtons from "./NavButtons"
 import NavLinks from "./NavLinks"
 import ContextMenu from "./ContextMenu"
 
-const Navbar: React.FunctionComponent = () => {
+const Navbar: React.FC = () => {
   return (
     <nav
       className="

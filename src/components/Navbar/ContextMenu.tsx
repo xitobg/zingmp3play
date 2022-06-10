@@ -3,7 +3,7 @@ import IconSetting from "../Icons/Setting"
 import IconLogin from "../Icons/Login"
 import IconGithub from "../Icons/Github"
 
-const ContextMenu: React.FunctionComponent = () => {
+const ContextMenu: React.FC = () => {
 
   const styleMenu = `
     flex

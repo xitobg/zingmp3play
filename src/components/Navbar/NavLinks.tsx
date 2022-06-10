@@ -6,7 +6,7 @@ interface LinkProps {
   titleLink: string
 }
 
-const NavLinks: React.FunctionComponent<LinkProps> = ({ toLink, titleLink })=> {
+const NavLinks: React.FC<LinkProps> = ({ toLink, titleLink })=> {
   return (
     <div className="items-center">
       <Link

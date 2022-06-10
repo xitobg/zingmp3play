@@ -1,6 +1,6 @@
 import React from "react"
 
-const NavAvatar: React.FunctionComponent = () => {
+const NavAvatar: React.FC = () => {
 	return (
     <img
       src="http://s4.music.126.net/style/web2/img/default/default_avatar.jpg?param=60y60"

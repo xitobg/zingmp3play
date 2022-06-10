@@ -6,7 +6,7 @@ interface SvgProps {
   setHeight: string
 }
 
-const ArrowRight: React.FunctionComponent<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers }) => {
+const ArrowRight: React.FC<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

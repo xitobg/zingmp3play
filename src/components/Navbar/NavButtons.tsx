@@ -2,7 +2,7 @@ import React from "react"
 import IconArrowLeft from "../Icons/ArrowLeft"
 import IconArrowRight from "../Icons/ArrowRight"
 
-const NavButtons: React.FunctionComponent = () => {
+const NavButtons: React.FC = () => {
   return (
     <div className="flex">
       {/* arrow-nav-button__left-right => ../../index.css */}

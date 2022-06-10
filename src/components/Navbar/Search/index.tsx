@@ -1,7 +1,7 @@
 import React from "react"
 import SearchBox from "./SearchBox"
 
-const Search: React.FunctionComponent = () => {
+const Search: React.FC = () => {
   return (
     <SearchBox />
   )

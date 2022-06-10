@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import IconSearch from "../../Icons/Search"
 
-const SearchBox: React.FunctionComponent = () => {
+const SearchBox: React.FC = () => {
 
   const [ currentActive, setActive ] = useState(false)
 
