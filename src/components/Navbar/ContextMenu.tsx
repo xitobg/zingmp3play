@@ -7,25 +7,17 @@ const ContextMenu: React.FC = () => {
 
   const styleMenu = `
     flex
-    items-center
-    text-[color:var(--color-text)]
-    px-1
-    py-1
-    bg-[red]
-    mb-[2px]
-    mx-1
-    my-1
-    rounded-lg
   `
 
   return (
     <div
       className="
+        fixed
         top-0
-        right-0
-        mr-[5vw]
-        mt-[3vw]
-        bg-[blue]
+        left-0
+        min-w-[139px]
+        min-h-[134px]
+        bg-[rgba(255, 255, 255, 0.88)]
       "
     >
       <div className={styleMenu}>
