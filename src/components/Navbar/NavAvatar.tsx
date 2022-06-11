@@ -1,6 +1,11 @@
-import React from "react"
+import React, {useState} from "react"
 
-const NavAvatar: React.FC = () => {
+interface handleEvenClick {
+  callbackActive: (e: any, active: boolean) => void
+}
+
+const NavAvatar: React.FC<handleEvenClick> = ({ callbackActive }) => {
+  const [isActive, setActive] = useState(false)
 	return (
     <img
       src="http://s4.music.126.net/style/web2/img/default/default_avatar.jpg?param=60y60"
@@ -12,6 +17,11 @@ const NavAvatar: React.FC = () => {
         cursor-pointer
         hover:brightness-[80%]
       "
+      onClick={(e) => {
+          setActive(!isActive)
+          callbackActive(e, !isActive)
+        }
+      }
     />
 	)
 }
