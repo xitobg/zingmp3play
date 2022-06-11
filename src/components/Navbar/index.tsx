@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import Search from "./Search"
 import NavAvatar from "./NavAvatar"
 import NavButtons from "./NavButtons"
@@ -6,12 +6,7 @@ import NavLinks from "./NavLinks"
 import ContextMenu from "./ContextMenu"
 
 const Navbar: React.FC = () => {
-
-  const [contextMenuActive, setContextMenuActive] = useState(false)
-  const [screenContextMenu, setScreenContextMenu] = useState({})
-
   return (
-
     <nav
       className="
         flex
@@ -35,9 +30,9 @@ const Navbar: React.FC = () => {
 
       {/* Navigation Links */}
       <div className="flex">
-        <NavLinks toLink="zingchart" titleLink="ZingChart"/>
-        <NavLinks toLink="top100" titleLink="Top100"/>
-        <NavLinks toLink="mv" titleLink="MV"/>
+        <NavLinks toLink="/zingchart" titleLink="ZingChart"/>
+        <NavLinks toLink="/top100" titleLink="Top100"/>
+        <NavLinks toLink="/mv" titleLink="MV"/>
       </div>
 
       {/* Right Part */}
@@ -45,16 +40,10 @@ const Navbar: React.FC = () => {
         {/* search-box */}
         <Search />
         {/* Avatar */}
-        <NavAvatar
-          callbackActive={(e, active) => {
-            setScreenContextMenu({screenX: e.screenX, screenY: e.screenY})
-            console.log(screenContextMenu)
-            setContextMenuActive(active)
-          }}
-        />
+        <NavAvatar />
       </div>
       {/* Context Menu */}
-      <ContextMenu isActive={contextMenuActive} />
+      <ContextMenu isActive={true} />
     </nav>
   )
 }

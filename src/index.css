@@ -16,7 +16,3 @@ body {
   background-color: var(--color-body-bg);
   font-family: 'Barlow', sans-serif;
 }
-
-.arrow-nav-button__left-right {
-  @apply p-2 m-1 hover:bg-[color:var(--color-secondary-bg-for-transparent)] rounded-md hover:duration-200
-}
