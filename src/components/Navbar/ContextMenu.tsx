@@ -3,12 +3,14 @@ import IconSetting from "../Icons/Setting"
 import IconLogin from "../Icons/Login"
 import IconGithub from "../Icons/Github"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { rootState } from "../../utils/interface"
 
-interface activeProps {
-  isActive: boolean
-}
+const ContextMenu: React.FC = () => {
 
-const ContextMenu: React.FC<activeProps> = ({ isActive = "false" }) => {
+  const isActive = useSelector((state: rootState) => {
+    return state.toogleContextMenu.isActive
+  })
 
   const styleLinks = `
     flex

@@ -1,6 +1,7 @@
 import React from "react"
 import IconArrowLeft from "../Icons/ArrowLeft"
 import IconArrowRight from "../Icons/ArrowRight"
+import { useNavigate } from "react-router-dom"
 
 const NavButtons: React.FC = () => {
   const styleArrow = `
@@ -10,12 +11,20 @@ const NavButtons: React.FC = () => {
     rounded-md
     hover:duration-200
   `
+  const navigate = useNavigate()
+
   return (
     <div className="flex">
-      <button className={styleArrow}>
-        <IconArrowLeft setColor="white" setWidth="24" setHeight="24"/>
+      <button
+        className={styleArrow}
+        onClick={() => {navigate(-1)}}
+      >
+          <IconArrowLeft setColor="white" setWidth="24" setHeight="24"/>
       </button>
-      <button className={styleArrow}>
+      <button
+        className={styleArrow}
+        onClick={() => {navigate(+1)}}
+      >
         <IconArrowRight setColor="white" setWidth="24px" setHeight="24px"/>
       </button>
     </div>

@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
         <NavAvatar />
       </div>
       {/* Context Menu */}
-      <ContextMenu isActive={true} />
+      <ContextMenu />
     </nav>
   )
 }
