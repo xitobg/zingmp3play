@@ -1,7 +1,7 @@
 import React from "react"
 import Search from "./Search"
 import NavAvatar from "./NavAvatar"
-import NavButtons from "./NavButtons"
+import NavArrows from "./NavArrows"
 import NavLinks from "./NavLinks"
 import ContextMenu from "./ContextMenu"
 
@@ -25,11 +25,11 @@ const Navbar: React.FC = () => {
         backdrop-saturate-[180%]
       "
     >
-      {/* Navigation Buttons */}
-      <NavButtons />
+      {/* Navigation Buttons Arrow */}
+      <NavArrows />
 
       {/* Navigation Links */}
-      <div className="flex">
+      <div className="navigation_links flex">
         <NavLinks toLink="/zingchart" titleLink="ZingChart"/>
         <NavLinks toLink="/top100" titleLink="Top100"/>
         <NavLinks toLink="/mv" titleLink="MV"/>

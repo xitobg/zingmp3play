@@ -8,6 +8,7 @@ const SearchBox: React.FC = () => {
   return (
     <div
       className={`
+          search_box
           flex
           items-center
           w-52
@@ -25,6 +26,7 @@ const SearchBox: React.FC = () => {
       {/* Icon Search */}
       <div
         className={`
+            icon_search
             ml-2
             mr-1
             ${(isActive === false ? "opacity-25" : "")}
@@ -38,6 +40,7 @@ const SearchBox: React.FC = () => {
         type="search"
         placeholder={ isActive === false ? "Search" : "" }
         className={`
+            input_search
             text-[16px]
             text-[color:var(--color-text)]
             border-none

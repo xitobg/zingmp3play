@@ -8,13 +8,13 @@ import { rootState } from "../../utils/interface"
 import { setContextMenu } from "./NavAvatar"
 
 const ContextMenu: React.FC = () => {
-
+  // redux store toogleContextMenu
   const isActive = useSelector((state: rootState) => {
     return state.toogleContextMenu.isActive
   })
-
   const logContextMenu = useContext(setContextMenu)
 
+  // style item link
   const styleLinks = `
     flex
     items-center

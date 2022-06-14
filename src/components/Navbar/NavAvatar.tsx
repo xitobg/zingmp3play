@@ -12,15 +12,18 @@ const setContextMenu = createContext(setWH)
 
 const NavAvatar: React.FC = () => {
 
+  // get value redux toogleContextMenu
   const isActive = useSelector((state: rootState) => {
     return state.toogleContextMenu.isActive
   })
-
   const dispatch = useDispatch()
 
+  // set value redux
   const handleToogleContextMenu = (e: any) => {
+    // set value useContext
     setWH.width = e.clientX
     setWH.height = e.clientY
+    // action toggle
     dispatch(toogle(!isActive))
   }
 

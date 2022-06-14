@@ -4,17 +4,20 @@ import IconArrowRight from "../Icons/ArrowRight"
 import { useNavigate } from "react-router-dom"
 
 const NavButtons: React.FC = () => {
+  // style button arrow
   const styleArrow = `
+    button_icon
     p-2
     m-1
     hover:bg-[color:var(--color-secondary-bg-for-transparent)]
     rounded-md
     hover:duration-200
   `
+  // next & prev navigat
   const navigate = useNavigate()
 
   return (
-    <div className="flex">
+    <div className="navigation_buttons flex">
       <button
         className={styleArrow}
         onClick={() => {navigate(-1)}}

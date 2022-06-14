@@ -8,7 +8,7 @@ interface LinkProps {
 
 const NavLinks: React.FC<LinkProps> = ({ toLink, titleLink })=> {
   return (
-    <div className="items-center">
+    <div className="items_link items-center">
       <Link
         to={toLink || ""}
         className="
