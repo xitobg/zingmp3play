@@ -34,6 +34,7 @@ const ContextMenu: React.FC = () => {
       }}
       className={`
           fixed
+          bg-[color:var(--color-body-bg)]
           min-w-[139px]
           min-h-[134px]
           text-[color:var(--color-text)]
@@ -44,7 +45,7 @@ const ContextMenu: React.FC = () => {
           rounded-xl
           box-border
           p-[6px]
-          indent-[1000]
+          z-[1000]
           ${
             (isActive === false ? "hidden" : "block")
           }
