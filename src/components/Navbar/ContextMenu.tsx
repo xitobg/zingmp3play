@@ -23,7 +23,8 @@ const ContextMenu: React.FC = () => {
     py-[8px]
     rounded-[8px]
     hover:bg-[color:var(--color-primary-bg-for-transparent)]
-    hover:duration-200
+    transition-all
+    duration-300
   `
 
   return (
@@ -34,20 +35,19 @@ const ContextMenu: React.FC = () => {
       }}
       className={`
           fixed
+          min-w-[136px]
+          max-w-[240px]
           bg-[color:var(--color-body-bg)]
-          min-w-[139px]
-          min-h-[134px]
           text-[color:var(--color-text)]
-          shadow-[0_6px_12px_-4px_rgba(0,0,0,0.08)]
-          backdrop-blur-md
-          border-solid
-          border-[rgba(0,0,0,0.06)]
           rounded-xl
+          backdrop-blur-md
           box-border
+          shadow-md
+          shadow-[rgba(255,255,255,0.2)]
           p-[6px]
           z-[1000]
           ${
-            (isActive === false ? "hidden" : "block")
+            (isActive === false ? "opacity-0" : "opacity-95")
           }
         `
       }

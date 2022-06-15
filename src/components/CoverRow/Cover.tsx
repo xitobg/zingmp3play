@@ -1,7 +1,14 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import IconPlay from "../Icons/Play"
 
-const Cover: React.FC = () => {
+interface coverProps {
+  title: string
+  sortDescription?: string
+  thumbnail: string
+}
+
+const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail}) => {
 
   const [isCoverHover, setCoverHover] = useState(false)
 
@@ -13,7 +20,7 @@ const Cover: React.FC = () => {
         <div
           className={`
             cover__button--play
-            ${(isCoverHover == false ? "hidden" : "block")}
+            ${(isCoverHover === false ? "opacity-0" : "opacity-100")}
           `}
           onMouseOver = {() => {
             setCoverHover(true)
@@ -42,6 +49,8 @@ const Cover: React.FC = () => {
               left-1/2
               translate-x-[-50%]
               translate-y-[-50%]
+              transition-opacity
+              duration-300
             "
           >
             <button>
@@ -51,7 +60,7 @@ const Cover: React.FC = () => {
         </div>
         <img
           className="rounded-xl w-[100%]"
-          src="https://p2.music.126.net/GvYQoflE99eoeGi9jG4Bsw==/109951165375336156.jpg?param=512y512"
+          src={thumbnail}
           alt=""
           onMouseOver = {() => {
             setCoverHover(true)
@@ -71,16 +80,45 @@ const Cover: React.FC = () => {
             rounded-xl
             blur-lg
             opacity-60
-            duration-1000
-            ${(isCoverHover === false ? "hidden" : "")}
+            scale-95
+            transition-opacity
+            duration-300
+            ${(isCoverHover === false ? "opacity-0" : "opacity-100")}
           `}
           style={{
-            backgroundImage: `url(https://p2.music.126.net/GvYQoflE99eoeGi9jG4Bsw==/109951165375336156.jpg?param=512y512)`
+            backgroundImage: `url(${thumbnail})`
           }}>
         </div>
       </div>
       <div className="cover__item--text">
-
+        <div
+          className="
+            cover__title
+            text-base
+            font-semibold
+            text-[color:var(--color-text)]
+            truncate
+          ">
+          <Link to="/">{title}</Link>
+        </div>
+        <div
+          className="
+            cover__info
+            text-xs
+            text-[color:var(--color-text)]
+            opacity-60
+          "
+          style={{
+            maxWidth: "100%",
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 2,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+          >
+          <span>{sortDescription}</span>
+        </div>
       </div>
     </div>
   )
