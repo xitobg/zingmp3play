@@ -5,12 +5,17 @@ import { getHomeApi } from "../api/home"
 
 const Home: React.FC = () => {
 
-  const [data, setData] = useState<object>()
+  const [hSuggestPl, setHSuggestPl] = useState<object | any>()
+  const [hAutoTheme1, setHAutoTheme1] = useState<object | any>()
+  const [hXone, setHXone] = useState<object | any>()
 
   useEffect(() => {
     (
       async () => {
-        setData((await getHomeApi())[0])
+        const data = await getHomeApi()
+        setHSuggestPl(data[0])
+        setHAutoTheme1(data[1])
+        setHXone(data[2])
       }
     )()
   }, [])
@@ -20,6 +25,37 @@ const Home: React.FC = () => {
       <Navbar />
       <main className="inset-0 box-border pt-[64px] pb-[96px] px-[10vw]">
         <div className="cover__row grid grid-cols-5 gap-x-6 gap-y-11">
+          {
+            (hSuggestPl === undefined) ? (
+              ""
+            ) : (
+              hSuggestPl.items.map((e:any, i:any) => {
+                return <Cover key={i} title={e.title} link={`/playlist/${e.encodeId}`} thumbnail={e.thumbnail} sortDescription={e.sortDescription} />
+              })
+            )
+          }
+        </div>
+        <div className="cover__row grid grid-cols-5 gap-x-6 gap-y-11">
+          {
+            (hAutoTheme1 === undefined) ? (
+              ""
+            ) : (
+              hAutoTheme1.items.map((e:any, i:any) => {
+                return <Cover key={i} title={e.title} link={`/playlist/${e.encodeId}`} thumbnail={e.thumbnail} sortDescription={e.sortDescription} />
+              })
+            )
+          }
+        </div>
+        <div className="cover__row grid grid-cols-5 gap-x-6 gap-y-11">
+          {
+            (hXone === undefined) ? (
+              ""
+            ) : (
+              hXone.items.map((e:any, i:any) => {
+                return <Cover key={i} title={e.title} link={`/playlist/${e.encodeId}`} thumbnail={e.thumbnail} sortDescription={e.sortDescription} />
+              })
+            )
+          }
         </div>
       </main>
     </>
