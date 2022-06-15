@@ -1,7 +1,7 @@
 import React, { createContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { toogle } from "../../redux/navSlice"
-import { rootState } from "../../utils/interface"
+import { rootState } from "../../utils/types"
 
 let setWH = {
   width: 0,

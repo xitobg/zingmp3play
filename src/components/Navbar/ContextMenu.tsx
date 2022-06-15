@@ -4,7 +4,7 @@ import IconLogin from "../Icons/Login"
 import IconGithub from "../Icons/Github"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { rootState } from "../../utils/interface"
+import { rootState } from "../../utils/types"
 import { setContextMenu } from "./NavAvatar"
 
 const ContextMenu: React.FC = () => {
