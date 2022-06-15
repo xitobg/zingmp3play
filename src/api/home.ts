@@ -1,9 +1,13 @@
 import axios from "../utils/axios"
 
-export const getHome = async () => {
-  await axios.get("/home", {
-    params: {
-      page: 1
-    }
-  })
+const getHomeApi = async (): Promise<any> => {
+  return (
+    await axios.get("/home", {
+      params: {
+        page: 1
+      }
+    })
+  ).data.data.items.filter((item: any) => item.sectionType === "playlist")
 }
+
+export { getHomeApi }
