@@ -4,11 +4,12 @@ import IconPlay from "../Icons/Play"
 
 interface coverProps {
   title: string
-  sortDescription?: string
+  sortDescription: string
   thumbnail: string
+  link: string
 }
 
-const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail}) => {
+const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }) => {
 
   const [isCoverHover, setCoverHover] = useState(false)
 
@@ -17,69 +18,77 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail}) => {
       className="cover__item"
     >
       <div className="cover__item--container relative">
-        <div
-          className={`
-            cover__button--play
-            ${(isCoverHover === false ? "opacity-0" : "opacity-100")}
-          `}
-          onMouseOver = {() => {
-            setCoverHover(true)
-          }}
-          onMouseOut = {() => {
-            setCoverHover(false)
-          }}
-        >
+
+        {/* Button Icon Play */}
+        <Link to={link}>
           <div
-            className="
-              w-[22%]
-              h-[22%]
-              flex
-              items-center
-              justify-center
-              bg-[hsla(0,0%,100%,.14)]
-              rounded-full
-              pl-1
-              border
-              border-solid
-              border-[hsla(0,0%,100%,.08)]
-              cursor-pointer
-              backdrop-blur
-              absolute
-              top-1/2
-              left-1/2
-              translate-x-[-50%]
-              translate-y-[-50%]
-              transition-opacity
-              duration-300
-            "
+            className={`
+              cover__button--play
+              ${(isCoverHover === false ? "opacity-0" : "opacity-100")}
+            `}
+            onMouseOver = {() => {
+              setCoverHover(true)
+            }}
+            onMouseOut = {() => {
+              setCoverHover(false)
+            }}
           >
-            <button>
+            <div
+              className="
+                w-[22%]
+                h-[22%]
+                flex
+                items-center
+                justify-center
+                bg-[hsla(0,0%,100%,.14)]
+                hover:bg-[hsla(0,0%,100%,.4)]
+                rounded-full
+                pl-1
+                border
+                border-solid
+                border-[hsla(0,0%,100%,.08)]
+                cursor-pointer
+                backdrop-blur
+                absolute
+                top-1/2
+                left-1/2
+                translate-x-[-50%]
+                translate-y-[-50%]
+                transition-all
+                duration-300
+              "
+            >
               <IconPlay setColor="var(--color-text)" setWidth="15px" setHeight="15px"/>
-            </button>
+            </div>
           </div>
-        </div>
-        <img
-          className="rounded-xl w-[100%]"
-          src={thumbnail}
-          alt=""
-          onMouseOver = {() => {
-            setCoverHover(true)
-          }}
-          onMouseOut = {() => {
-            setCoverHover(false)
-          }}
-        />
+        </Link>
+
+        {/* Thumbnail */}
+        <Link to={link}>
+          <img
+            className="rounded-xl w-[100%] cursor-pointer"
+            src={thumbnail}
+            alt=""
+            onMouseOver = {() => {
+              setCoverHover(true)
+            }}
+            onMouseOut = {() => {
+              setCoverHover(false)
+            }}
+          />
+        </Link>
+
+        {/* Img Blur */}
         <div
           className={`
             absolute
-            top-3
+            top-4
             w-full
             h-full
             z-[-1]
             bg-cover
             rounded-xl
             blur-lg
-            opacity-60
             scale-95
             transition-opacity
             duration-300
@@ -99,7 +108,7 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail}) => {
             text-[color:var(--color-text)]
             truncate
           ">
-          <Link to="/">{title}</Link>
+          <Link to={link}>{title}</Link>
         </div>
         <div
           className="
