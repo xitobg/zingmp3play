@@ -1,11 +1,11 @@
 import axios from "../utils/axios"
 
-const getHomeApi = async (): Promise<any> => {
+const getHomeApiPlayList = async (page: number): Promise<any> => {
   try {
     return (
       await axios.get("/home", {
         params: {
-          page: 1
+          page: page
         }
       })
     ).data.data.items.filter((item: any) => item.sectionType === "playlist")
@@ -14,4 +14,18 @@ const getHomeApi = async (): Promise<any> => {
   }
 }
 
-export { getHomeApi }
+const getHomeApiArtist = async (page: number): Promise<any> => {
+  try {
+    return (
+      await axios.get("/home", {
+        params: {
+          page: page
+        }
+      })
+    ).data.data.items.filter((item: any) => item.sectionType === "artistSpotlight")
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+export { getHomeApiPlayList, getHomeApiArtist }
