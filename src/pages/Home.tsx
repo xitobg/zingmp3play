@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from "react"
 import Cover from "../components/Cover"
+import ArtistCover from "../components/Cover/ArtistCover"
 import Navbar from "../components/Navbar"
 import { getHomeApiPlayList, getHomeApiArtist } from "../api/home"
 
@@ -10,23 +11,29 @@ const Home: React.FC = () => {
   const [hXone, setHXone] = useState<object | any>()
   const [hAutoTheme2, setHAutoTheme2] = useState<object | any>()
   const [top100, setTop100] = useState<object | any>()
+  const [artist, setArtist] = useState<object | any>()
 
   useEffect(() => {
     (
       async () => {
         let dataHomePlayList:Array<object> = []
-        dataHomePlayList = dataHomePlayList.concat(
-          await getHomeApiPlayList(1),
-          await getHomeApiPlayList(2),
-          await getHomeApiPlayList(3),
-        )
+        await Promise.all([
+          getHomeApiPlayList(1),
+          getHomeApiPlayList(2),
+          getHomeApiPlayList(3),
+        ]).then((values) => {
+          dataHomePlayList = dataHomePlayList.concat(values[0], values[1], values[2])
+        })
         setHSuggestPl(dataHomePlayList[0])
         setHAutoTheme1(dataHomePlayList[1])
         setHXone(dataHomePlayList[2])
         setHAutoTheme2(dataHomePlayList[3])
         setTop100(dataHomePlayList[4])
 
-        console.log(await getHomeApiArtist(3))
+        // get Artist
+        let dataHomeArtist:Array<object> = []
+        dataHomeArtist = await getHomeApiArtist(3)
+        setArtist(dataHomeArtist[0])
       }
     )()
   }, [])
@@ -108,6 +115,24 @@ const Home: React.FC = () => {
           </div>
         </div>
 
+        {/* Artist */}
+        <div className="index__row mt-8">
+          {
+            (artist === undefined) ? ("") : (<div className="cover__title flex justify-between items-end text-[28px] font-bold text-[color:var(--color-text)] mb-5 uppercase">
+              {artist.sectionType}
+            </div>)
+          }
+          <div className="cover__row grid grid-cols-6 gap-x-6 gap-y-11">
+            {
+              (artist === undefined) ? ("") : (
+                artist.items.map((e:any, i:any) => {
+                  return <ArtistCover key={i} title={e.name} link={`/artist/${e.alias}`} thumbnail={e.thumbnail} sortDescription=""/>
+                })
+              )
+            }
+          </div>
+        </div>
+
         {/* Top100 */}
         <div className="index__row mt-8">
           {
@@ -125,6 +150,7 @@ const Home: React.FC = () => {
             }
           </div>
         </div>
+
       </main>
     </>
   )
