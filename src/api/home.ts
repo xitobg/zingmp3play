@@ -1,31 +1,33 @@
 import axios from "../utils/axios"
 
+interface typesData {
+  items: {
+    sectionType: string
+  }[]
+}
+
 const getHomeApiPlayList = async (page: number): Promise<any> => {
   try {
-    return (
-      await axios.get("/home", {
+    const data:typesData = await axios.get("/home", {
         params: {
           page: page
         }
-      })
-    ).data.data.items.filter((item: any) => item.sectionType === "playlist")
+      }
+    )
+    let customData:Array<object> = []
+    data.items.forEach((element) => {
+      console.log()
+      if(element.sectionType === "playlist") {
+        customData.push(element)
+      }
+      if(element.sectionType === "artistSpotlight") {
+        customData.push(element)
+      }
+    })
+    return customData
   } catch(err) {
     console.log(err)
   }
 }
 
-const getHomeApiArtist = async (page: number): Promise<any> => {
-  try {
-    return (
-      await axios.get("/home", {
-        params: {
-          page: page
-        }
-      })
-    ).data.data.items.filter((item: any) => item.sectionType === "artistSpotlight")
-  } catch(err) {
-    console.log(err)
-  }
-}
-
-export { getHomeApiPlayList, getHomeApiArtist }
+export { getHomeApiPlayList }

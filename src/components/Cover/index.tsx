@@ -101,6 +101,8 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }
             font-semibold
             text-[color:var(--color-text)]
             truncate
+            hover:underline
+            mt-2
           ">
           <Link to={link}>{title}</Link>
         </div>

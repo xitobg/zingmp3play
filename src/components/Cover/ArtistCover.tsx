@@ -102,6 +102,8 @@ const ArtistCover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, 
             text-[color:var(--color-text)]
             truncate
             text-center
+            mt-2
+            hover:underline
           ">
           <Link to={link}>{title}</Link>
         </div>
