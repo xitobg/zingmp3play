@@ -33,11 +33,11 @@ const Home: React.FC = () => {
         <div className="index__row mt-8">
           {
             hSuggestPl &&
-            hSuggestPl.map((e: any) => (
+            hSuggestPl.map((e: any, i: any) => (
               (e.sectionType === "playlist") ? (
                 <>
                   <div
-                    key={e.sectionId}
+                    key={i}
                     className="
                       cover__title
                       flex
@@ -46,11 +46,11 @@ const Home: React.FC = () => {
                       text-[28px]
                       font-bold
                       text-[color:var(--color-text)]
-                      mt-6
+                      mt-9
                       mb-3
                       uppercase
                   ">
-                    {(e.title == "") ? (e.sectionId.slice(1)) : (e.title)}
+                    {(e.title === "") ? (e.sectionId.slice(1)) : (e.title)}
                   </div>
                   <div
                     className="
@@ -61,9 +61,9 @@ const Home: React.FC = () => {
                       gap-y-11
                     ">
                     {
-                      e.items.map((element:any) => (
+                      e.items.map((element:any, index: any) => (
                         <Cover
-                          key={element.encodeId}
+                          key={index}
                           title={element.title}
                           link={`/playlist/${element.encodeId}`}
                           thumbnail={element.thumbnail}
@@ -77,7 +77,7 @@ const Home: React.FC = () => {
                 <>
                   {/* artist */}
                   <div
-                    key={e.sectionId}
+                    key={i}
                     className="
                       cover__title
                       flex
@@ -86,7 +86,8 @@ const Home: React.FC = () => {
                       text-[28px]
                       font-bold
                       text-[color:var(--color-text)]
-                      mb-5
+                      mt-9
+                      mb-3
                       uppercase
                   ">
                     {e.sectionType}
@@ -100,9 +101,9 @@ const Home: React.FC = () => {
                       gap-y-11
                     ">
                     {
-                      e.items.map((element:any) => (
+                      e.items.map((element:any, index: any) => (
                         <ArtistCover
-                          key={element.alias}
+                          key={index}
                           title={element.name}
                           link={`/artist/${element.alias}`}
                           thumbnail={element.thumbnail}
