@@ -4,7 +4,7 @@ interface contextMenu {
 
 export interface coverProps {
   title: string
-  sortDescription: string
+  sortDescription?: string
   thumbnail: string
   link: string
 }

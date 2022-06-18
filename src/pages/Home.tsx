@@ -48,6 +48,7 @@ const Home: React.FC = () => {
                       text-[color:var(--color-text)]
                       mt-6
                       mb-3
+                      uppercase
                   ">
                     {(e.title == "") ? (e.sectionId) : (e.title)}
                   </div>
@@ -105,7 +106,6 @@ const Home: React.FC = () => {
                           title={element.name}
                           link={`/artist/${element.alias}`}
                           thumbnail={element.thumbnail}
-                          sortDescription=""
                         />
                       ))
                     }
