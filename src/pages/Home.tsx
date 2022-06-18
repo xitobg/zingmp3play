@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from "react"
-import Cover from "../components/Cover"
+import PlaylistCover from "../components/Cover/PlaylistCover"
 import ArtistCover from "../components/Cover/ArtistCover"
 import Navbar from "../components/Navbar"
 import { getHomeApiPlayList } from "../api/home"
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
       {/* {console.log(hSuggestPl)} */}
       <Navbar />
       <main className="inset-0 box-border pt-[64px] pb-[96px] px-[10vw]">
-        {/* playlist */}
+        {/* Playlist */}
         <div className="index__row mt-8">
           {
             hSuggestPl &&
@@ -59,10 +59,10 @@ const Home: React.FC = () => {
                       grid-cols-5
                       gap-x-6
                       gap-y-11
-                    ">
+                  ">
                     {
                       e.items.map((element:any, index: any) => (
-                        <Cover
+                        <PlaylistCover
                           key={index}
                           title={element.title}
                           link={`/playlist/${element.encodeId}`}
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
                 </>
               ) : (
                 <>
-                  {/* artist */}
+                  {/* Artist */}
                   <div
                     key={i}
                     className="
@@ -99,7 +99,7 @@ const Home: React.FC = () => {
                       grid-cols-6
                       gap-x-6
                       gap-y-11
-                    ">
+                  ">
                     {
                       e.items.map((element:any, index: any) => (
                         <ArtistCover
@@ -111,13 +111,13 @@ const Home: React.FC = () => {
                       ))
                     }
                   </div>
-                  {/* end artist */}
+                  {/* End Artist */}
                 </>
               )
             ))
           }
         </div>
-        {/* end playlist */}
+        {/* End Playlist */}
       </main>
     </>
   )

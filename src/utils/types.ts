@@ -9,6 +9,11 @@ export interface coverProps {
   link: string
 }
 
+export interface coverPropsPlaylist {
+  thumbnail: string
+}
+
+
 export interface rootState {
   toogleContextMenu: contextMenu
 }
