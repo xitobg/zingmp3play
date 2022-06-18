@@ -50,7 +50,7 @@ const Home: React.FC = () => {
                       mb-3
                       uppercase
                   ">
-                    {(e.title == "") ? (e.sectionId) : (e.title)}
+                    {(e.title == "") ? (e.sectionId.slice(1)) : (e.title)}
                   </div>
                   <div
                     className="

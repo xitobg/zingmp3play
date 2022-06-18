@@ -18,5 +18,16 @@ body {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 8px;
+  overflow: auto;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(128, 128, 128, 0.38);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.7);
 }
