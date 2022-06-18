@@ -24,6 +24,7 @@ const ArtistCover: React.FC<coverProps> = ({ title, thumbnail, link }) => {
           />
         </Link>
         {/* End Thumbnail */}
+
         {/* Image Blur */}
         <div
           className={`

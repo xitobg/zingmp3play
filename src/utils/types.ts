@@ -10,6 +10,10 @@ export interface coverProps {
   link: string
 }
 
-export interface coverPropsPlaylist {
-  thumbnail: string
+export interface detailPlaylistInfoProps {
+  thumbnailM: string
+  title: string
+  artists: Array<object>
+  total: string
+  description: string
 }

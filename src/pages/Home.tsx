@@ -6,7 +6,7 @@ import { getHomeApiPlayList } from "../api/home"
 
 const Home: React.FC = () => {
 
-  const [hSuggestPl, setHSuggestPl] = useState<Array<object>>([])
+  const [hSuggestPl, setHSuggestPl] = useState<Array<object>>()
 
   useEffect(() => {
     (
