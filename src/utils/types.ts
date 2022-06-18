@@ -1,5 +1,6 @@
-interface contextMenu {
-  isActive: boolean
+export interface navLinksProps {
+  toLink?: string
+  titleLink: string
 }
 
 export interface coverProps {
@@ -11,9 +12,4 @@ export interface coverProps {
 
 export interface coverPropsPlaylist {
   thumbnail: string
-}
-
-
-export interface rootState {
-  toogleContextMenu: contextMenu
 }

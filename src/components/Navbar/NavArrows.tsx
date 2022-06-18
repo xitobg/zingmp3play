@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom"
 const NavButtons: React.FC = () => {
   // style button arrow
   const styleArrow = `
-    button_icon
     p-2
     m-1
     hover:bg-[color:var(--color-secondary-bg-for-transparent)]
@@ -17,7 +16,7 @@ const NavButtons: React.FC = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="navigation_buttons flex">
+    <div className="flex">
       <button
         className={styleArrow}
         onClick={() => {navigate(-1)}}

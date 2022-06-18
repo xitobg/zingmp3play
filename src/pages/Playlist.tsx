@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import { useParams } from "react-router-dom"
 import { getDetailPlaylist } from "../api/playlist"
-import PlaylistInfo from "../components/Playlist/PlaylistInfo"
+import DetailPlaylistInfo from "../components/DetailPlaylistInfo"
 
 const Playlist: React.FC = () => {
 
   const [dataPlaylist, setDataPlaylist] = useState<any>({})
 
-  const params: any = useParams()
+  const params:any = useParams()
 
   useEffect(() => {
     (
@@ -16,7 +16,7 @@ const Playlist: React.FC = () => {
         setDataPlaylist(await getDetailPlaylist(params.playlistId))
       }
     )()
-  }, [])
+  }, [params])
 
   return (
     <>
@@ -29,7 +29,7 @@ const Playlist: React.FC = () => {
           mx-[10vw]
         "
       >
-        <PlaylistInfo thumbnail={dataPlaylist.thumbnailM}/>
+        <DetailPlaylistInfo thumbnail={dataPlaylist.thumbnailM}/>
       </div>
       {/* End Main Playlist */}
     </>

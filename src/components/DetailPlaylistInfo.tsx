@@ -1,7 +1,5 @@
-import React, { useState } from "react"
-import { } from "../../utils/types"
-import IconPlay from "../Icons/Play"
-import { coverPropsPlaylist } from "../../utils/types"
+import React from "react"
+import { coverPropsPlaylist } from "../utils/types"
 
 const PlaylistInfo:React.FC<coverPropsPlaylist> = ({ thumbnail }) => {
 

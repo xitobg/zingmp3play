@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { coverProps } from "../../utils/types"
+import { coverProps } from "../utils/types"
 
-const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }) => {
+const ArtistCover: React.FC<coverProps> = ({ title, thumbnail, link }) => {
 
   const [isCoverHover, setCoverHover] = useState(false)
 
@@ -12,7 +12,7 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }
         {/* Thumbnail */}
         <Link to={link}>
           <img
-            className="rounded-xl w-[100%] cursor-pointer"
+            className="rounded-full w-[100%] cursor-pointer"
             src={thumbnail}
             alt={title}
             onMouseOver = {() => {
@@ -33,7 +33,7 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }
             h-full
             z-[-1]
             bg-cover
-            rounded-xl
+            rounded-full
             blur-lg
             scale-95
             transition-opacity
@@ -46,42 +46,24 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }
         </div>
         {/* End Image Blur */}
       </div>
-      <div className="mt-2">
-        {/* Title */}
-        <div className="
-            text-base
-            font-semibold
-            text-[color:var(--color-text)]
-            truncate
-            hover:underline
+      {/* Name Artist */}
+      <div
+        className="
+          text-base
+          font-semibold
+          text-center
+          text-[color:var(--color-text)]
+          truncate
+          hover:underline
+          mt-2
         ">
-          <Link to={link}>
-            {title}
-          </Link>
-        </div>
-        {/* End Title */}
-        {/* Sort Description */}
-        <div
-          className="
-            text-xs
-            text-[color:var(--color-text)]
-            opacity-60
-          "
-          style={{
-            maxWidth: "100%",
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 2,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          <span>{sortDescription}</span>
-        </div>
-        {/* End Sort Description */}
+        <Link to={link}>
+          {title}
+        </Link>
       </div>
+      {/* End Name Artist */}
     </div>
   )
 }
 
-export default Cover
+export default ArtistCover
