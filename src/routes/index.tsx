@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom"
 import Home from "../pages/Home"
 import DetailPlaylist from "../pages/DetailPlaylist"
 
-const App: React.FC = () => {
+const RouterPage: React.FC = () => {
   return (
     <Routes>
       <Route index element={<Home />} />
@@ -15,4 +15,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App;
+export default RouterPage

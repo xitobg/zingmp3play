@@ -27,18 +27,7 @@ const ArtistCover: React.FC<coverProps> = ({ title, thumbnail, link }) => {
 
         {/* Image Blur */}
         <div
-          className={`
-            absolute
-            top-3
-            w-full
-            h-full
-            z-[-1]
-            bg-cover
-            rounded-full
-            blur-lg
-            scale-95
-            transition-opacity
-            duration-300
+          className={`absolute top-3 w-full h-full z-[-1] bg-cover rounded-full blur-lg scale-95 transition-opacity duration-300
             ${(isCoverHover === false ? "opacity-0" : "opacity-100")}
           `}
           style={{
@@ -49,15 +38,7 @@ const ArtistCover: React.FC<coverProps> = ({ title, thumbnail, link }) => {
       </div>
       {/* Name Artist */}
       <div
-        className="
-          text-base
-          font-semibold
-          text-center
-          text-[color:var(--color-text)]
-          truncate
-          hover:underline
-          mt-2
-        ">
+        className="text-base font-semibold text-center text-[color:var(--color-text)] truncate hover:underline mt-2">
         <Link to={link}>
           {title}
         </Link>

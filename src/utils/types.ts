@@ -3,6 +3,12 @@ export interface navLinksProps {
   titleLink: string
 }
 
+export interface SvgProps {
+  setColor: string
+  setWidth: string
+  setHeight: string
+}
+
 export interface coverProps {
   title: string
   sortDescription?: string
@@ -16,4 +22,7 @@ export interface detailPlaylistInfoProps {
   artists: Array<object>
   total: string
   description: string
+}
+export interface TrackListDetailPlaylistProps {
+  items: Array<object>
 }

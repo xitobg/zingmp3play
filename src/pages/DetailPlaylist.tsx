@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import { useParams } from "react-router-dom"
 import { getDetailPlaylist } from "../api/detailPlaylist"
 import DetailPlaylistInfo from "../components/DetailPlaylistInfo"
+import TrackListDetailPlaylist from "../components/TrackListPlaylist"
 
 const Playlist: React.FC = () => {
 
@@ -22,18 +23,21 @@ const Playlist: React.FC = () => {
     <>
       {console.log(dataDetailPlaylist)}
       <Navbar />
-      {
-        dataDetailPlaylist &&
-        <div className="mx-[10vw] mt-20">
-          <DetailPlaylistInfo
-            thumbnailM={dataDetailPlaylist.thumbnailM}
-            title={dataDetailPlaylist.title}
-            artists={dataDetailPlaylist.artists}
-            total={dataDetailPlaylist.song.total}
-            description={dataDetailPlaylist.description}
-          />
-        </div>
-      }
+      <div className="mx-[10vw] mt-16 mb-24">
+        {
+          dataDetailPlaylist &&
+          <>
+            <DetailPlaylistInfo
+              thumbnailM={dataDetailPlaylist.thumbnailM}
+              title={dataDetailPlaylist.title}
+              artists={dataDetailPlaylist.artists}
+              total={dataDetailPlaylist.song.total}
+              description={dataDetailPlaylist.description}
+            />
+            <TrackListDetailPlaylist items={dataDetailPlaylist.song.items}/>
+          </>
+        }
+      </div>
     </>
   )
 }

@@ -7,13 +7,7 @@ const SearchBox: React.FC = () => {
 
   return (
     <div
-      className={`
-          search_box
-          flex
-          items-center
-          w-52
-          h-8
-          rounded-lg
+      className={`search_box flex items-center w-52 h-8 rounded-lg
           ${
             ( isActive === false
               ? "bg-[color:var(--color-secondary-bg-for-transparent)]"
@@ -25,10 +19,7 @@ const SearchBox: React.FC = () => {
     >
       {/* Icon Search */}
       <div
-        className={`
-            icon_search
-            ml-2
-            mr-1
+        className={`icon_search ml-2 mr-1
             ${(isActive === false ? "opacity-25" : "")}
           `
         }
@@ -39,15 +30,7 @@ const SearchBox: React.FC = () => {
       <input
         type="search"
         placeholder={ isActive === false ? "Search" : "" }
-        className={`
-            input_search
-            text-[16px]
-            text-[color:var(--color-text)]
-            border-none
-            bg-transparent
-            font-semibold
-            outline-none
-            w-10/12
+        className={`input_search text-[16px] text-[color:var(--color-text)] border-none bg-transparent font-semibold outline-none w-10/12
             ${(isActive === false ? "opacity-25" : "")}
           `
         }

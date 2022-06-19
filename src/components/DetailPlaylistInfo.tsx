@@ -1,10 +1,15 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { detailPlaylistInfoProps } from "../utils/types"
+import IconPlay from "./Icons/Play"
+import IconHeart from "./Icons/Heart"
 
 const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, artists, total, description }) => {
+
+  const styleButton = "flex justify-center items-center rounded-lg py-2 px-4 w-auto h-10 min-h-[40px] transition duration-300 hover:scale-105 mr-4"
+
   return (
-    <div className="flex">
+    <div className="flex mb-[72px]">
       {/* Thumbnail */}
       <div className="relative min-w-[288px] min-h-[288px]">
         <img
@@ -14,17 +19,7 @@ const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, art
         />
         {/* Image Blur */}
         <div
-          className="
-            absolute
-            top-3
-            w-full
-            h-full
-            z-[-1]
-            bg-cover
-            rounded-xl
-            blur-md
-            scale-95
-          "
+          className="absolute top-3 w-full h-full z-[-1] bg-cover rounded-xl blur-md scale-95"
           style={{
             backgroundImage: `url(${thumbnailM})`
           }}
@@ -86,7 +81,16 @@ const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, art
           {/* End Description */}
           {/* Button */}
           <div className="flex">
-
+            {/* Play */}
+            <div className="flex mt-8">
+              <button className={`${styleButton} bg-[color:var(--color-primary-bg)] text-[color:var(--color-primary)]`}>
+                <IconPlay setColor="var(--color-primary)" setWidth="16px" setHeight="16px" />
+                <span className="ml-2 text-lg font-semibold">PLAY</span>
+              </button>
+              <button className={`${styleButton} bg-[color:var(--color-secondary-bg)] text-[color:var(--color-primary)]`}>
+                <IconHeart setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
+              </button>
+            </div>
           </div>
           {/* End Button */}
       </div>

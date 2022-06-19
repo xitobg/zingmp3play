@@ -5,13 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 const NavButtons: React.FC = () => {
   // style button arrow
-  const styleArrow = `
-    p-2
-    m-1
-    hover:bg-[color:var(--color-secondary-bg-for-transparent)]
-    rounded-md
-    hover:duration-200
-  `
+  const styleArrow = "p-2 m-1 hover:bg-[color:var(--color-secondary-bg-for-transparent)] rounded-md hover:duration-200"
   // next & prev navigat
   const navigate = useNavigate()
 

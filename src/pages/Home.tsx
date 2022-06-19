@@ -37,26 +37,11 @@ const Home: React.FC = () => {
               (e.sectionType === "playlist") ? (
                 <>
                   <div
-                    className="
-                      flex
-                      justify-between
-                      items-end
-                      text-[28px]
-                      font-bold
-                      text-[color:var(--color-text)]
-                      mt-9
-                      mb-3
-                      uppercase
-                  ">
+                    className="flex justify-between items-end text-[28px] font-bold text-[color:var(--color-text)] mt-9 mb-3 uppercase">
                     {(e.title === "") ? (e.sectionId.slice(1)) : (e.title)}
                   </div>
                   <div
-                    className="
-                      grid
-                      grid-cols-5
-                      gap-x-6
-                      gap-y-11
-                  ">
+                    className="grid grid-cols-5 gap-x-6 gap-y-11">
                     {
                       e.items.map((element:any, index: any) => (
                         <PlaylistCover
@@ -73,26 +58,11 @@ const Home: React.FC = () => {
                 <>
                   {/* Artist */}
                   <div
-                    className="
-                      flex
-                      justify-between
-                      items-end
-                      text-[28px]
-                      font-bold
-                      text-[color:var(--color-text)]
-                      mt-9
-                      mb-3
-                      uppercase
-                  ">
+                    className="flex justify-between items-end text-[28px] font-bold text-[color:var(--color-text)] mt-9 mb-3 uppercase">
                     {e.sectionType}
                   </div>
                   <div
-                    className="
-                      grid
-                      grid-cols-6
-                      gap-x-6
-                      gap-y-11
-                  ">
+                    className="grid grid-cols-6 gap-x-6 gap-y-11">
                     {
                       e.items.map((element:any, index: any) => (
                         <ArtistCover

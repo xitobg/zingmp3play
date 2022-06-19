@@ -6,7 +6,10 @@
 
 :root {
   --color-body-bg: #222;
+  --color-primary-bg: #bbcdff;
   --color-text: #fff;
+  --color-primary: #335eea;
+  --color-secondary-bg: #323232;
   --color-secondary-bg-for-transparent: hsla(0,0%,100%,0.08);
   --color-primary-bg-for-transparent: hsla(0,0%,100%,0.12);
   --color-navbar-bg: rgba(34,34,34,0.86);

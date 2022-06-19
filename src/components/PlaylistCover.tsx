@@ -27,18 +27,7 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }
 
         {/* Image Blur */}
         <div
-          className={`
-            absolute
-            top-3
-            w-full
-            h-full
-            z-[-1]
-            bg-cover
-            rounded-xl
-            blur-lg
-            scale-95
-            transition-opacity
-            duration-300
+          className={`absolute top-3 w-full h-full z-[-1] bg-cover rounded-xl blur-lg scale-95 transition-opacity duration-300
             ${(isCoverHover === false ? "opacity-0" : "opacity-100")}
           `}
           style={{
@@ -49,13 +38,7 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }
       </div>
       <div className="mt-2">
         {/* Title */}
-        <div className="
-            text-base
-            font-semibold
-            text-[color:var(--color-text)]
-            truncate
-            hover:underline
-        ">
+        <div className="text-base font-semibold text-[color:var(--color-text)] truncate hover:underline">
           <Link to={link}>
             {title}
           </Link>
@@ -64,11 +47,7 @@ const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }
 
         {/* Sort Description */}
         <div
-          className="
-            text-xs
-            text-[color:var(--color-text)]
-            opacity-60
-          "
+          className="text-xs text-[color:var(--color-text)] opacity-60"
           style={{
             maxWidth: "100%",
             display: "-webkit-box",

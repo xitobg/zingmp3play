@@ -1,10 +1,5 @@
 import React from "react"
-
-interface SvgProps {
-  setColor: string
-  setWidth: string
-  setHeight: string
-}
+import { SvgProps } from "../../utils/types"
 
 const Github: React.FC<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers }) => {
   return (

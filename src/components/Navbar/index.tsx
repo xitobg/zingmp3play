@@ -10,15 +10,7 @@ import { Link } from "react-router-dom"
 const Navbar: React.FC = () => {
 
   // Style Item Context Menu
-  const styleItemsContextMenu = `
-    flex
-    items-center
-    font-semibold
-    px-[5px]
-    py-[8px]
-    rounded-[8px]
-    hover:bg-[color:var(--color-primary-bg-for-transparent)]
-  `
+  const styleItemsContextMenu = "flex items-center font-semibold px-[5px] py-[8px] rounded-[8px] hover:bg-[color:var(--color-primary-bg-for-transparent)]"
 
   const [isContextMenuActive, setContextMenuActive] = useState<boolean>(false)
 
@@ -27,21 +19,7 @@ const Navbar: React.FC = () => {
   }
 
   return (
-    <nav
-      className="
-        flex
-        justify-between
-        items-center
-        bg-[color:var(--color-navbar-bg)]
-        h-16
-        px-[10vw]
-        inset-0
-        fixed
-        z-50
-        backdrop-blur-[20px]
-        backdrop-saturate-[180%]
-      "
-    >
+    <nav className="flex justify-between items-center bg-[color:var(--color-navbar-bg)] h-16 px-[10vw] inset-0 fixed z-50 backdrop-blur-[20px] backdrop-saturate-[180%]">
       {/* Navigation Buttons Arrow */}
       <NavArrows />
       {/* End Navigation Buttons Arrow */}
@@ -66,28 +44,14 @@ const Navbar: React.FC = () => {
           <img
             src="http://s4.music.126.net/style/web2/img/default/default_avatar.jpg"
             alt="avatar"
-            className="
-              h-[30px]
-              ml-3
-              rounded-full
-              cursor-pointer
-              hover:brightness-[80%]
-            "
+            className="h-[30px] ml-3 rounded-full cursor-pointer hover:brightness-[80%]"
             onClick={handleToggleContextMenu}
           />
           {/* End Avatar */}
 
           {/* Context Menu */}
           <div
-            className={`
-              absolute
-              right-0
-              min-w-[136px]
-              max-w-[240px]
-              bg-[#282828]
-              text-[color:var(--color-text)]
-              rounded-xl
-              p-[6px]
+            className={`absolute right-0 min-w-[136px] max-w-[240px] bg-[#282828] text-[color:var(--color-text)] rounded-xl p-[6px]
               ${
                 (isContextMenuActive === true ? "block" : "hidden")
               }
