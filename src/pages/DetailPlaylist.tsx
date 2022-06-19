@@ -31,6 +31,8 @@ const Playlist: React.FC = () => {
               artists={dataDetailPlaylist.artists}
               total={dataDetailPlaylist.song.total}
               description={dataDetailPlaylist.description}
+              like={dataDetailPlaylist.like}
+              contentLastUpdate={dataDetailPlaylist.contentLastUpdate}
             />
             <TrackListDetailPlaylist items={dataDetailPlaylist.song.items}/>
           </>

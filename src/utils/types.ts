@@ -22,6 +22,8 @@ export interface detailPlaylistInfoProps {
   artists: Array<object>
   total: string
   description: string
+  like: number
+  contentLastUpdate: number
 }
 export interface TrackListDetailPlaylistProps {
   items: Array<object>

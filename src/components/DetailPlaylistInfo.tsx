@@ -4,7 +4,9 @@ import { detailPlaylistInfoProps } from "../utils/types"
 import IconPlay from "./Icons/Play"
 import IconHeart from "./Icons/Heart"
 
-const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, artists, total, description }) => {
+const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, artists, total, description, like, contentLastUpdate }) => {
+
+  const playlistLastUpdate =  (new Date(contentLastUpdate*1000)).toLocaleDateString("vi-VN")
 
   const styleButton = "flex justify-center items-center rounded-lg py-2 px-4 w-auto h-10 min-h-[40px] transition duration-300 hover:scale-105 mr-4"
 
@@ -58,8 +60,17 @@ const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, art
           {/* End List Artists Playlist */}
 
           {/* Total Song */}
-          <div className="text-sm opacity-70 font-medium text-[color:var(--color-text)] mt-[2px]">
-            {total} Songs
+          <div className="flex items-center text-sm opacity-70 font-medium text-[color:var(--color-text)] mt-[2px]">
+            <span className="mr-3">
+              Updated at {playlistLastUpdate}
+            </span>
+            <span className="mr-3">
+              {total} Songs
+            </span>
+            <span className="flex items-center">
+              <IconHeart setColor="red" setWidth="16px" setHeight="16px" />
+              {like}
+            </span>
           </div>
           {/* End Total Song */}
 
@@ -86,9 +97,6 @@ const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, art
               <button className={`${styleButton} bg-[color:var(--color-primary-bg)] text-[color:var(--color-primary)]`}>
                 <IconPlay setColor="var(--color-primary)" setWidth="16px" setHeight="16px" />
                 <span className="ml-2 text-lg font-semibold">PLAY</span>
-              </button>
-              <button className={`${styleButton} bg-[color:var(--color-secondary-bg)] text-[color:var(--color-primary)]`}>
-                <IconHeart setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
               </button>
             </div>
           </div>
