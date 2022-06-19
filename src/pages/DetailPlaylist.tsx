@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import Navbar from "../components/Navbar"
 import { useParams } from "react-router-dom"
 import { getDetailPlaylist } from "../api/detailPlaylist"
 import DetailPlaylistInfo from "../components/DetailPlaylistInfo"
@@ -22,7 +21,6 @@ const Playlist: React.FC = () => {
   return (
     <>
       {console.log(dataDetailPlaylist)}
-      <Navbar />
       <div className="mx-[10vw] mt-16 mb-24">
         {
           dataDetailPlaylist &&

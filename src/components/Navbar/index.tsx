@@ -26,6 +26,7 @@ const Navbar: React.FC = () => {
 
       {/* Navigation Links */}
       <div className="flex">
+        <NavLinks toLink="/" titleLink="Home" />
         <NavLinks toLink="/zingchart" titleLink="ZingChart" />
         <NavLinks toLink="/top100" titleLink="Top100" />
         <NavLinks toLink="/mv" titleLink="MV" />

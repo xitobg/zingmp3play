@@ -1,6 +1,7 @@
 import React from "react"
 import { TrackListDetailPlaylistProps } from "../utils/types"
 import { Link } from "react-router-dom"
+import { formatTime } from "../utils/formatTime"
 
 const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items }) => {
   return (
@@ -8,12 +9,12 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
       {
         items.map((e: any, i:any) => {
           return (
-            <div className="flex items-center p-2 rounded-lg hover:bg-[color:var(--color-secondary-bg)] transition-all duration-300">
+            <div className={"flex items-center p-2 rounded-lg hover:bg-[color:var(--color-secondary-bg)] transition-all duration-300 " + (e.streamingStatus === 1 ? "cursor-pointer" : "cursor-default hover:bg-current")} >
               {/* Thumbnail */}
               <img className="rounded-lg w-[46px] h-[46px] mr-5" src={e.thumbnail} alt={e.title} />
               {/* End Thumbnail */}
               {/* Title & Artist */}
-              <div className="flex flex-col">
+              <div className="flex flex-1 flex-col">
                 {/* Title */}
                 <div className="text-[color:var(--color-text)] text-lg font-semibold truncate">{e.title}</div>
                 {/* Artist */}
@@ -36,8 +37,17 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
                     })
                   }
                 </div>
+                {/* End Artist */}
               </div>
               {/* End Title & Artist */}
+
+              {/* Show Song VIP */}
+              <div className="text-yellow-500 font-medium mr-4">{(e.streamingStatus === 1 ? "" : "VIP")}</div>
+              {/* End Show Song VIP */}
+
+              {/* Show Time Deration */}
+              <div className="text-[color:var(--color-text)] font-medium">{formatTime(e.duration)}</div>
+              {/* End Show Time Deration */}
             </div>
           )
         })

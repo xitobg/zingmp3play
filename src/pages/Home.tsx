@@ -1,7 +1,6 @@
 import React, { useState, useEffect }  from "react"
 import PlaylistCover from "../components/PlaylistCover"
 import ArtistCover from "../components/ArtistCover"
-import Navbar from "../components/Navbar"
 import { getHomeApiPlayList } from "../api/home"
 
 const Home: React.FC = () => {
@@ -27,7 +26,6 @@ const Home: React.FC = () => {
   return (
     <>
       {/* {console.log(hSuggestPl)} */}
-      <Navbar />
       <main className="inset-0 box-border pt-[64px] pb-[96px] px-[10vw]">
         {/* Playlist */}
         <div className="mt-8">
