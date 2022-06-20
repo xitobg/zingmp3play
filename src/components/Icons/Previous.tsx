@@ -1,7 +1,7 @@
 import React from "react"
 import { SvgProps } from "../../utils/types"
 
-const Play: React.FC<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers }) => {
+const Previous: React.FC<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,11 +12,11 @@ const Play: React.FC<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers })
       { ...orthers }
     >
       <path
-        d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+        d="M64 468V44c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12v176.4l195.5-181C352.1 22.3 384 36.6 384 64v384c0 27.4-31.9 41.7-52.5 24.6L136 292.7V468c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12z"
         fill={ setColor }
       />
     </svg>
   )
 }
 
-export default Play
+export default Previous
