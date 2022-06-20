@@ -2,58 +2,39 @@ import React, { useState } from "react"
 
 const ProgressBar:React.FC = () => {
 
-  const [isActiveProgressDotHover, setActiveProgressDotHover] = useState<boolean>(false)
-  const [isActiveProgressTooltipHover, setActiveProgressTooltipHover] = useState<boolean>(false)
+  const [isActiveDotSlider, setActiveDotSlider] = useState<boolean>(false)
+  const [valueSlider, setValueSlider] = useState<number>(0)
 
-  const handleActiveProgressDotHover = (handle: boolean) => {
-    setActiveProgressDotHover(handle)
+  const handleActiveDotSlider = (handle: boolean) => {
+    setActiveDotSlider(handle)
   }
 
-  const handleActiveProgressTooltipHover = (handle: boolean) => {
-    setActiveProgressTooltipHover(handle)
+  const handleChangeValueSlider = (event: any) => {
+    setValueSlider(event.target.value)
   }
 
   return (
     // Progress Bar
-    <div className="w-full my-[-6px]">
+    <div
+      className="my-[-6px] w-full"
+      onMouseOver={() => handleActiveDotSlider(true)}
+      onMouseOut={() => handleActiveDotSlider(false)}
+    >
       {/* Progress Bar Slider */}
       <div
-        className="py-[6px] px-0 w-auto"
-        onMouseOver={() => handleActiveProgressDotHover(true)}
-        onMouseOut={() => handleActiveProgressDotHover(false)}
+        className="flex w-auto py-[6px]"
       >
-        {/* Progress Bar Slider Rail */}
-        <div className="relative w-full h-[2px] transition-[width,height,left,right,top,bottom] bg-[hsla(0,0%,50.2%,.18)] rounded-[15px]">
-          {/* React Slider Process
-            * Change Progcess w-[23%]
-          */}
-            <div className="h-[2px] top-0 left-[0%] w-[25%] transition-[width,left] duration-[0s] absolute z-[1] bg-[#335eea] rounded-[15px]"></div>
-          {/* End React Slider Process  */}
-
-          {/* React Slider Dot
-            * Change Progcess left-[23%]
-          */}
-          <div className={"absolute z-[5] w-3 h-3 top-[50%] translate-x-[-50%] translate-y-[-50%] left-[25%] transition-[left]"}>
-            {/* Dot Handle */}
-            <div
-              className={"cursor-pointer w-full h-full rounded-full bg-[#fff] box-border " + (isActiveProgressDotHover ? "visible": "invisible")}
-              onMouseOver={() => handleActiveProgressTooltipHover(true)}
-              onMouseOut={() => handleActiveProgressTooltipHover(false)}
-              >
-            </div>
-            {/* End Dot Handle */}
-
-            {/* Dot Tooltip */}
-            <div className={"top-[-10px] left-[50%] translate-x-[-50%] translate-y-[-100%] absolute " + (isActiveProgressTooltipHover ? "visible" : "invisible")}>
-              <div className="text-sm font-medium whitespace-nowrap px-[6px] py-[2px] min-w-[20px] text-center text-[#000] rounded-[5px] bg-[#fff] box-content">
-                <span>0:41</span>
-              </div>
-            </div>
-            {/* End Dot Tooltip */}
-          </div>
-          {/* End React Slider Dot */}
-        </div>
-        {/* End Progress Bar Slider Rail */}
+        <input
+          className={ "player__slider w-full h-[2px] rounded-[5px] " + (isActiveDotSlider ? "player__slider--active" : "") }
+          type="range"
+          min="0"
+          max="100"
+          value={valueSlider}
+          style={{
+            background: `linear-gradient(90deg, var(--color-primary) ${valueSlider}%, var(--color-player-slider) ${valueSlider}%)`
+          }}
+          onChange={handleChangeValueSlider}
+        />
       </div>
       {/* End Progress Bar Slider */}
     </div>
