@@ -2,7 +2,7 @@ import React from "react"
 
 const Controls:React.FC = () => {
   return (
-    <div className="w-full h-full">
+    <div className="grid w-full h-full mx-[10vw]">
       test
     </div>
   )
