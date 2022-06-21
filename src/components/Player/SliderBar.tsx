@@ -44,8 +44,8 @@ const SliderBar: React.FC<sliderBarProps> = ({ currentTimeSong, durationTimeSong
           /*
             |-------|----------------------| <-- Slider Bar
             ^       ^                      ^
-            |       |                      |
-            |    clientX                   |
+            |_______|                      |
+            |clientX                       |
             |_____Slider Offset Width______|
           */
 
@@ -77,7 +77,6 @@ const SliderBar: React.FC<sliderBarProps> = ({ currentTimeSong, durationTimeSong
               window.removeEventListener("mousemove", handleMouseMove)
             }
           )
-
         }}
       >
         {/* Slider Bar Rail */}
@@ -114,7 +113,7 @@ const SliderBar: React.FC<sliderBarProps> = ({ currentTimeSong, durationTimeSong
             {/* End Dot Handle */}
 
             {/* Dot Tooltip */}
-            <div className={"top-[-10px] left-[50%] translate-x-[-50%] translate-y-[-100%] absolute " +(isActiveSliderTooltipHover ? "visible" : "invisible")}>
+            <div className={"top-[-10px] left-1/2 -translate-x-1/2 -translate-y-full absolute " +(isActiveSliderTooltipHover ? "visible" : "invisible")}>
               <div className="text-sm font-medium whitespace-nowrap px-[6px] py-[2px] min-w-[20px] text-center text-[#000] rounded-[5px] bg-[#fff] box-content">
                 <span>{formatTime(currentTimeSong)}</span>
               </div>
