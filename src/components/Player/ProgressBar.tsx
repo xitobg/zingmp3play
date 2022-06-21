@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { formatTime } from "../../utils/formatTime"
 
 interface a {
@@ -8,6 +8,7 @@ interface a {
 
 const ProgressBar: React.FC<a> = ({ c, d }) => {
 
+  const progressRef = useRef<HTMLDivElement>(null)
   let cd = ((c / d) * 100)
 
   const [isActiveProgressDotHover, setActiveProgressDotHover] = useState<boolean>(false)
@@ -23,10 +24,10 @@ const ProgressBar: React.FC<a> = ({ c, d }) => {
 
   return (
     // Progress Bar
-    <div className="w-full my-[-6px] cursor-pointer">
+    <div className="w-full my-[-6px]">
       {/* Progress Bar Slider */}
       <div
-        className="py-[6px] px-0 w-auto"
+        className="py-[6px] px-0 w-auto cursor-pointer"
         onMouseOver={() => handleActiveProgressDotHover(true)}
         onMouseOut={() => handleActiveProgressDotHover(false)}
       >
@@ -40,6 +41,7 @@ const ProgressBar: React.FC<a> = ({ c, d }) => {
             style={{
               width: `${cd}%`
             }}
+            ref={progressRef}
           ></div>
           {/* End React Slider Process  */}
 
