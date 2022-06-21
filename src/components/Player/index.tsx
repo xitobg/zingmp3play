@@ -34,6 +34,7 @@ const Player:React.FC = () => {
       <ProgressBar
         c={currentTime}
         d={duration}
+        auRef={audioRef.current}
       />
 
       <Controls
@@ -55,7 +56,6 @@ const Player:React.FC = () => {
         onLoadedDataCapture = {() => {
             if(audioRef.current) {
               setDuration(audioRef.current.duration)
-              console.log(audioRef.current.duration)
             }
         }}
       />

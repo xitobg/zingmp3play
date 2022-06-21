@@ -1,12 +1,13 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { formatTime } from "../../utils/formatTime"
 
 interface a {
   c: number
   d: number
+  auRef: HTMLAudioElement | null
 }
 
-const ProgressBar: React.FC<a> = ({ c, d }) => {
+const ProgressBar: React.FC<a> = ({ c, d, auRef}) => {
 
   const progressRef = useRef<HTMLDivElement>(null)
   let cd = ((c / d) * 100)
@@ -30,6 +31,27 @@ const ProgressBar: React.FC<a> = ({ c, d }) => {
         className="py-[6px] px-0 w-auto cursor-pointer"
         onMouseOver={() => handleActiveProgressDotHover(true)}
         onMouseOut={() => handleActiveProgressDotHover(false)}
+        onMouseDown={(e) => {
+          console.log("Mouse Down")
+
+          const hadleMouseMove = (e: MouseEvent) => {
+            console.log("Mouse Move")
+            if(progressRef.current) {
+              if(auRef) {
+              }
+            }
+          }
+
+          window.addEventListener("mousemove", hadleMouseMove)
+
+          window.addEventListener(
+            "mouseup",
+            () => {
+              window.removeEventListener("mousemove", hadleMouseMove)
+            }
+          )
+
+        }}
       >
         {/* Progress Bar Slider Rail */}
         <div className="relative w-full h-[2px] transition-[width,height,left,right,top,bottom] bg-[hsla(0,0%,50.2%,.18)] rounded-[15px]">
@@ -51,12 +73,14 @@ const ProgressBar: React.FC<a> = ({ c, d }) => {
           <div
             className="absolute z-[5] w-3 h-3 top-[50%] translate-x-[-50%] translate-y-[-50%] transition-[left]"
             style={{
-              left: `${cd}%`
+              // left: `${cd}%`
             }}
           >
             {/* Dot Handle */}
             <div
-              className={"cursor-pointer w-full h-full rounded-full bg-[#fff] box-border " + (isActiveProgressDotHover ? "visible": "invisible")}
+              className={"cursor-pointer w-full h-full rounded-full bg-[#fff] box-border " +
+                (isActiveProgressDotHover ? "visible": "invisible")
+              }
               onMouseOver={() => handleActiveProgressTooltipHover(true)}
               onMouseOut={() => handleActiveProgressTooltipHover(false)}
             >
