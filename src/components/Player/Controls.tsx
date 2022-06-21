@@ -35,20 +35,12 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
     setActiveDotVolumeSliderHover(handle)
   }
 
-  const handleChangeVolumeSlider = (event: any) => {
-    setValueVolumeSlider(Number(event.target.value) / 100)
-    if(auRef) {
-      auRef.volume = valueVolumeSlider
-    }
-    localStorage.setItem("zing-volume", String(valueVolumeSlider));
-  }
-
   const handleMuteVolume = () => {
     if(valueVolumeSlider == 0) {
-      setValueVolumeSlider(Number(localStorage.getItem("zing-volume")))
       if(auRef) {
         auRef.volume = Number(localStorage.getItem("zing-volume"))
       }
+      setValueVolumeSlider(Number(localStorage.getItem("zing-volume")))
     } else {
       setValueVolumeSlider(0)
       if(auRef) {
@@ -73,19 +65,19 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
 
   let volumeUI
 
-  if (valueVolumeSlider * 100 == 0) {
+  if (valueVolumeSlider == 0) {
     volumeUI =
       <button className={"mx-2 my-0 " + styleButtons} title="Mute">
         <IconVolumeMute setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
       </button>
   }
-  if(valueVolumeSlider * 100 > 0) {
+  if(valueVolumeSlider > 0) {
     volumeUI =
       <button className={"mx-2 my-0 " + styleButtons} title="Mute">
         <IconVolumeHalf setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
       </button>
   }
-  if(valueVolumeSlider * 100 > 50) {
+  if(valueVolumeSlider > 0.5) {
     volumeUI =
       <button className={"mx-2 my-0 " + styleButtons} title="Mute">
         <IconVolume setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
@@ -168,27 +160,50 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
               /*
                                |<- Slider Volume ->|
                 |--------------|------|------------|---|
-                |              ^      ^            ^
-                |              |      |            |
+                ^              ^      ^            ^
+                |---Bounding---|      |            |
                 |______________|___clientX         |
                                |Slider Offset Width|
               */
 
               if(sliderVolumeRef.current) {
-                let percentSliderVolumeWidth  = (e.clientX / sliderVolumeRef.current.offsetWidth) * 100
-                console.log(e)
-                console.log(sliderVolumeRef.current.offsetWidth)
+                let percentSliderVolumeWidth  = ((e.clientX - sliderVolumeRef.current.getBoundingClientRect().left) / sliderVolumeRef.current.offsetWidth) * 100
                 if(auRef) {
-                    auRef.volume = 0.1
+                  if(percentSliderVolumeWidth < 0) {
+                    setValueVolumeSlider(0)
+                    localStorage.setItem("zing-volume", String(0))
+                    auRef.volume = 0
+                  }
+                  if(percentSliderVolumeWidth > 100) {
+                    localStorage.setItem("zing-volume", String(1))
+                    setValueVolumeSlider(1)
+                    auRef.volume = 1
+                  }
+                  if(percentSliderVolumeWidth > 0 && percentSliderVolumeWidth < 100) {
+                    localStorage.setItem("zing-volume", String(percentSliderVolumeWidth / 100))
+                    setValueVolumeSlider(percentSliderVolumeWidth / 100)
+                    auRef.volume = percentSliderVolumeWidth / 100
+                  }
                 }
               }
 
               const handleMouseMove = (e: MouseEvent) => {
                 // console.log("Mouse Move")
                 if(sliderVolumeRef.current) {
-                  let percentSliderVolumeWidth  = (e.clientX / sliderVolumeRef.current.offsetWidth) * 100
+                  let percentSliderVolumeWidth  = ((e.clientX - sliderVolumeRef.current.getBoundingClientRect().left) / sliderVolumeRef.current.offsetWidth) * 100
                   if(auRef) {
-                    auRef.volume = 0.9
+                    if(percentSliderVolumeWidth < 0) {
+                      setValueVolumeSlider(0)
+                      auRef.volume = 0
+                    }
+                    if(percentSliderVolumeWidth > 100) {
+                      setValueVolumeSlider(1)
+                      auRef.volume = 1
+                    }
+                    if(percentSliderVolumeWidth > 0 && percentSliderVolumeWidth < 100) {
+                      setValueVolumeSlider(percentSliderVolumeWidth / 100)
+                      auRef.volume = percentSliderVolumeWidth / 100
+                    }
                   }
                 }
               }
@@ -207,12 +222,12 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
             }}
           >
             {/* React Volume Slider Rail */}
-            <div className="w-full transition-[width,height,left,right,top,bottom] bg-[hsla(0,0%,50.2%,.18)] rounded-[15px] h-1">
+            <div className="w-full bg-[hsla(0,0%,50.2%,.18)] rounded-[15px] h-1">
               {/* Slider Progress
                 Change Progress -> width: 23%
               */}
               <div
-                className="h-full top-0 left-0 transition-[width,left] duration-[0] bg-[color:var(--color-primary)] rounded-[15px]"
+                className="h-full top-0 left-0 transition-[width] bg-[color:var(--color-primary)] rounded-[15px]"
                 style={{
                   width: `${valueVolumeSlider * 100}%`
                 }}

@@ -50,7 +50,8 @@ const SliderBar: React.FC<sliderBarProps> = ({ currentTimeSong, durationTimeSong
           */
 
           if(sliderRef.current) {
-            let percentSliderWidth  = (e.clientX / sliderRef.current.offsetWidth) * 100
+            // let percentSliderWidth  = (e.clientX / sliderRef.current.offsetWidth) * 100
+            let percentSliderWidth  = ((e.clientX - sliderRef.current.getBoundingClientRect().left) / sliderRef.current.offsetWidth) * 100
             if(auRef) {
               auRef.currentTime = (auRef.duration / 100) * percentSliderWidth
             }
