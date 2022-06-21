@@ -18,8 +18,8 @@ const Player:React.FC = () => {
   useEffect(() => {
     (
       async () => {
-        const infosong  = await getInfoSong("ZZ8FBUW9")
-        const data = await getSong("ZZ8FBUW9")
+        const infosong  = await getInfoSong("ZZDI9B7U")
+        const data = await getSong("ZZDI9B7U")
         setSongThumbnail(infosong.thumbnail)
         setSongTitle(infosong.title)
         setSongArtistsNames(infosong.artistsNames)

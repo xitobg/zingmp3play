@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { formatTime } from "../../utils/formatTime"
 
 interface a {
@@ -6,62 +6,74 @@ interface a {
   d: number
 }
 
-const ProgressBar:React.FC<a> = ({ c, d }) => {
+const ProgressBar: React.FC<a> = ({ c, d }) => {
 
-  const [isActiveDotSlider, setActiveDotSlider] = useState<boolean>(false)
-  const [isActiveTooltipSlider, setActiveTooltipSlider] = useState<boolean>(false)
-  const [valueSlider, setValueSlider] = useState<number>(0)
+  let cd = ((c / d) * 100)
 
-  console.log((c/d) * 100)
+  const [isActiveProgressDotHover, setActiveProgressDotHover] = useState<boolean>(false)
+  const [isActiveProgressTooltipHover, setActiveProgressTooltipHover] = useState<boolean>(false)
 
-  const handleActiveDotSlider = (handle: boolean) => {
-    setActiveDotSlider(handle)
+  const handleActiveProgressDotHover = (handle: boolean) => {
+    setActiveProgressDotHover(handle)
   }
 
-  const handleActiveTooltipSlider = (handle: boolean) => {
-    setActiveTooltipSlider(handle)
-  }
-
-  const handleChangeValueSlider = (event: any) => {
-    setValueSlider(event.target.value)
+  const handleActiveProgressTooltipHover = (handle: boolean) => {
+    setActiveProgressTooltipHover(handle)
   }
 
   return (
     // Progress Bar
-    <div
-      className="my-[-6px] w-full"
-      onMouseOver={ () => { handleActiveDotSlider(true); handleActiveTooltipSlider(true) }}
-      onMouseOut={ () => { handleActiveDotSlider(false); handleActiveTooltipSlider(false) }}
-    >
+    <div className="w-full my-[-6px] cursor-pointer">
       {/* Progress Bar Slider */}
-      <div className="flex w-auto py-[6px] relative">
-        <input
-          className={ "player__slider w-full h-[2px] rounded-[5px] " + (isActiveDotSlider ? "player__slider--active" : "") }
-          type="range"
-          min="0"
-          max="100"
-          value={valueSlider}
-          style={{
-            background: `linear-gradient(90deg, var(--color-primary) ${(c/d) * 100}%, var(--color-player-slider) ${(c/d) * 100}%)`
-          }}
-          onChange={handleChangeValueSlider}
-        />
+      <div
+        className="py-[6px] px-0 w-auto"
+        onMouseOver={() => handleActiveProgressDotHover(true)}
+        onMouseOut={() => handleActiveProgressDotHover(false)}
+      >
+        {/* Progress Bar Slider Rail */}
+        <div className="relative w-full h-[2px] transition-[width,height,left,right,top,bottom] bg-[hsla(0,0%,50.2%,.18)] rounded-[15px]">
+          {/* React Slider Process
+            * Change Progcess w-[23%]
+          */}
+          <div
+            className="h-[2px] top-0 left-[0%] transition-[width,left] duration-[0s] absolute z-[1] bg-[#335eea] rounded-[15px]"
+            style={{
+              width: `${cd}%`
+            }}
+          ></div>
+          {/* End React Slider Process  */}
 
-        {/* Tooltip */}
-        <div
-          className={"absolute -top-8 -translate-x-2/4 " + (isActiveTooltipSlider ? "visible" : "invisible")}
-          style={{
-            left: `${(c/d) * 100}%`
-          }}
-        >
-          <div className="text-sm font-medium whitespace-nowrap px-[6px] py-[2px] min-w-[20px] text-center text-[#000] rounded-[5px] bg-[#fff] box-content">
-            <span>{formatTime(c)}</span>
+          {/* React Slider Dot
+            * Change Progcess left-[23%]
+          */}
+          <div
+            className="absolute z-[5] w-3 h-3 top-[50%] translate-x-[-50%] translate-y-[-50%] transition-[left]"
+            style={{
+              left: `${cd}%`
+            }}
+          >
+            {/* Dot Handle */}
+            <div
+              className={"cursor-pointer w-full h-full rounded-full bg-[#fff] box-border " + (isActiveProgressDotHover ? "visible": "invisible")}
+              onMouseOver={() => handleActiveProgressTooltipHover(true)}
+              onMouseOut={() => handleActiveProgressTooltipHover(false)}
+            >
+            </div>
+            {/* End Dot Handle */}
+
+            {/* Dot Tooltip */}
+            <div className={"top-[-10px] left-[50%] translate-x-[-50%] translate-y-[-100%] absolute " +(isActiveProgressTooltipHover ? "visible" : "invisible")}>
+              <div className="text-sm font-medium whitespace-nowrap px-[6px] py-[2px] min-w-[20px] text-center text-[#000] rounded-[5px] bg-[#fff] box-content">
+                <span>{formatTime(c)}</span>
+              </div>
+            </div>
+            {/* End Dot Tooltip */}
           </div>
+          {/* End React Slider Dot */}
         </div>
-        {/* End Tooltip */}
+        {/* End Progress Bar Slider Rail */}
       </div>
       {/* End Progress Bar Slider */}
-
     </div>
     // End Progress Bar
   )

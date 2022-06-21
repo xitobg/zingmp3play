@@ -36,25 +36,6 @@ body {
   background: rgba(128, 128, 128, 0.7);
 }
 
-.player__slider {
-  cursor: pointer;
-  -webkit-appearance: none;
-  outline: none;
-}
-
-.player__slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  border-radius: 50%;
-  background: #fff;
-  cursor: pointer;
-}
-
-.player__slider--active::-webkit-slider-thumb {
-  width: 12px;
-  height: 12px;
-}
-
 .volume__slider {
   cursor: pointer;
   -webkit-appearance: none;
