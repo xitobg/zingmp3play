@@ -1,13 +1,66 @@
-import React from "react"
+import React, { useEffect, useState, useRef } from "react"
 import ProgressBar from "./ProgressBar"
 import Controls from "./Controls"
+import { getSong, getInfoSong } from "../../api/song"
 
 const Player:React.FC = () => {
+
+  const [dataSong, setDataSong] = useState<string>("")
+  const [songThumbnail, setSongThumbnail] = useState<string>("")
+  const [songTitle, setSongTitle] = useState<string>("")
+  const [songArtistsNames, setSongArtistsNames] = useState<string>("")
+
+  const [currentTime, setCurrentTime] = useState<number>(0)
+  const [duration, setDuration] = useState<number>(0)
+
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  useEffect(() => {
+    (
+      async () => {
+        const infosong  = await getInfoSong("ZZ8FBUW9")
+        const data = await getSong("ZZ8FBUW9")
+        setSongThumbnail(infosong.thumbnail)
+        setSongTitle(infosong.title)
+        setSongArtistsNames(infosong.artistsNames)
+        setDataSong(data[128])
+      }
+    )()
+  }, [])
+
   return (
     <div className="flex flex-col justify-around h-16 backdrop-saturate-[180%] backdrop-blur-[30px] bg-[color:var(--color-navbar-bg)] fixed inset-x-0 bottom-0 z-[100]">
-      <ProgressBar />
-      <Controls thumbnail="https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/avatars/e/c/1/f/ec1fcdefabbc8fea32a2eb23301837d3.jpg" title="Anh Kết Em Rồi (Single)" artistsNames="Miu Lê, Karik, Châu Đăng Khoa"/>
+
+      <ProgressBar
+        c={currentTime}
+        d={duration}
+      />
+
+      <Controls
+        thumbnail={songThumbnail}
+        title={songTitle}
+        artistsNames={songArtistsNames}
+        auRef={audioRef.current}
+      />
+
+      <audio
+        ref={audioRef}
+        src={dataSong}
+        onTimeUpdateCapture = {() => {
+            if(audioRef.current) {
+              setCurrentTime(audioRef.current.currentTime)
+            }
+          }
+        }
+        onLoadedDataCapture = {() => {
+            if(audioRef.current) {
+              setDuration(audioRef.current.duration)
+              console.log(audioRef.current.duration)
+            }
+        }}
+      />
     </div>
+
   )
 }
 

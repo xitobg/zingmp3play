@@ -1,10 +1,18 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { formatTime } from "../../utils/formatTime"
 
-const ProgressBar:React.FC = () => {
+interface a {
+  c: number
+  d: number
+}
+
+const ProgressBar:React.FC<a> = ({ c, d }) => {
 
   const [isActiveDotSlider, setActiveDotSlider] = useState<boolean>(false)
   const [isActiveTooltipSlider, setActiveTooltipSlider] = useState<boolean>(false)
   const [valueSlider, setValueSlider] = useState<number>(0)
+
+  console.log((c/d) * 100)
 
   const handleActiveDotSlider = (handle: boolean) => {
     setActiveDotSlider(handle)
@@ -34,7 +42,7 @@ const ProgressBar:React.FC = () => {
           max="100"
           value={valueSlider}
           style={{
-            background: `linear-gradient(90deg, var(--color-primary) ${valueSlider}%, var(--color-player-slider) ${valueSlider}%)`
+            background: `linear-gradient(90deg, var(--color-primary) ${(c/d) * 100}%, var(--color-player-slider) ${(c/d) * 100}%)`
           }}
           onChange={handleChangeValueSlider}
         />
@@ -43,11 +51,11 @@ const ProgressBar:React.FC = () => {
         <div
           className={"absolute -top-8 -translate-x-2/4 " + (isActiveTooltipSlider ? "visible" : "invisible")}
           style={{
-            left: `${valueSlider}%`
+            left: `${(c/d) * 100}%`
           }}
         >
           <div className="text-sm font-medium whitespace-nowrap px-[6px] py-[2px] min-w-[20px] text-center text-[#000] rounded-[5px] bg-[#fff] box-content">
-            <span>3:01</span>
+            <span>{formatTime(c)}</span>
           </div>
         </div>
         {/* End Tooltip */}

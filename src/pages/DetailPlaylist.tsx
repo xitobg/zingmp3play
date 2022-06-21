@@ -20,7 +20,7 @@ const Playlist: React.FC = () => {
 
   return (
     <>
-      {console.log(dataDetailPlaylist)}
+      {/* {console.log(dataDetailPlaylist)} */}
       <div className="mx-[10vw] mt-16 mb-24">
         {
           dataDetailPlaylist &&
