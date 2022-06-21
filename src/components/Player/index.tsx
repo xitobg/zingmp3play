@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
-import ProgressBar from "./ProgressBar"
+import SliderBar from "./SliderBar"
 import Controls from "./Controls"
 import { getSong, getInfoSong } from "../../api/song"
 
@@ -31,9 +31,9 @@ const Player:React.FC = () => {
   return (
     <div className="flex flex-col justify-around h-16 backdrop-saturate-[180%] backdrop-blur-[30px] bg-[color:var(--color-navbar-bg)] fixed inset-x-0 bottom-0 z-[100]">
 
-      <ProgressBar
-        c={currentTime}
-        d={duration}
+      <SliderBar
+        currentTimeSong={currentTime}
+        durationTimeSong={duration}
         auRef={audioRef.current}
       />
 
@@ -47,13 +47,14 @@ const Player:React.FC = () => {
       <audio
         ref={audioRef}
         src={dataSong}
-        onTimeUpdateCapture = {() => {
+        className="hidden"
+        onTimeUpdate = {() => {
             if(audioRef.current) {
               setCurrentTime(audioRef.current.currentTime)
             }
           }
         }
-        onLoadedDataCapture = {() => {
+        onLoadedData = {() => {
             if(audioRef.current) {
               setDuration(audioRef.current.duration)
             }
