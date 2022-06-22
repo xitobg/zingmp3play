@@ -53,6 +53,8 @@ const getInfoSongPlayer = async (id: string): Promise<any> => {
         customData["thumbnail"] = e.thumbnail
       }
     })
+  }).catch((err) => {
+    console.log(err)
   })
 
   return customData

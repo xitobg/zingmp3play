@@ -6,7 +6,7 @@ interface typesData {
   }[]
 }
 
-const getHomeApiPlayList = async (page: number): Promise<any> => {
+const getHomePlayList = async (page: number): Promise<any> => {
   try {
     const data:typesData = await axios.get("/home", {
         params: {
@@ -29,4 +29,23 @@ const getHomeApiPlayList = async (page: number): Promise<any> => {
   }
 }
 
-export { getHomeApiPlayList }
+const getDataHome = async (): Promise<any> => {
+
+  let customData:Array<object> = []
+
+  await Promise.all([
+    getHomePlayList(1),
+    getHomePlayList(2),
+    getHomePlayList(3),
+    getHomePlayList(4),
+    getHomePlayList(5),
+  ]).then((values) => {
+    customData = [].concat(...values)
+  }).catch((err) => {
+    console.log(err)
+  })
+
+  return customData
+}
+
+export { getDataHome }

@@ -1,24 +1,16 @@
 import React, { useState, useEffect }  from "react"
 import PlaylistCover from "../components/PlaylistCover"
 import ArtistCover from "../components/ArtistCover"
-import { getHomeApiPlayList } from "../api/home"
+import { getDataHome } from "../api/home"
 
 const Home: React.FC = () => {
 
-  const [hSuggestPl, setHSuggestPl] = useState<Array<object>>()
+  const [dataHome, setdataHome] = useState<Array<object>>()
 
   useEffect(() => {
     (
       async () => {
-        await Promise.all([
-          getHomeApiPlayList(1),
-          getHomeApiPlayList(2),
-          getHomeApiPlayList(3),
-          getHomeApiPlayList(4),
-          getHomeApiPlayList(5),
-        ]).then((values) => {
-          setHSuggestPl([].concat(...values))
-        })
+        setdataHome(await getDataHome())
       }
     )()
   }, [])
@@ -30,8 +22,8 @@ const Home: React.FC = () => {
         {/* Playlist */}
         <div className="mt-8">
           {
-            hSuggestPl &&
-            hSuggestPl.map((e: any, i: any) => (
+            dataHome &&
+            dataHome.map((e: any, i: any) => (
               (e.sectionType === "playlist") ? (
                 <>
                   <div
