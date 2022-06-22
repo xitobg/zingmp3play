@@ -10,6 +10,7 @@ import IconVolume from "../Icons/Volume"
 import IconVolumeMute from "../Icons/VolumeMute"
 import IconVolumeHalf from "../Icons/VolumeHalf"
 import IconArrowUp from "../Icons/ArrowUp"
+import Slider from "../Player/Slider"
 
 interface controlsProps {
   thumbnail: string
@@ -20,34 +21,10 @@ interface controlsProps {
 
 const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRef }) => {
 
-  const sliderVolumeRef = useRef<HTMLDivElement>(null)
-
   const styleButtons = "p-2 flex justify-center items-center bg-transparent rounded-[25%] transition-all duration-200 hover:bg-[color:var(--color-secondary-bg-for-transparent)]"
 
-  const [valueVolumeSlider, setValueVolumeSlider] = useState<number>(Number(localStorage.getItem("zing-volume")) || 0.5)
+  const [valueVolumeSlider, setValueVolumeSlider] = useState<number>((Number(localStorage.getItem("zing-volume")) * 100) || 0.5 * 100)
   const [isIconPlay, setIconPlay] = useState<boolean>(false)
-
-  // Active UI Dot Slider Hover
-  const [isActiveDotVolumeSliderHover, setActiveDotVolumeSliderHover] = useState<boolean>(false)
-
-  // handle Active Volume Slider Hover
-  const handleActiveDotVolumeSlider = (handle: boolean) => {
-    setActiveDotVolumeSliderHover(handle)
-  }
-
-  const handleMuteVolume = () => {
-    if(valueVolumeSlider == 0) {
-      if(auRef) {
-        auRef.volume = Number(localStorage.getItem("zing-volume"))
-      }
-      setValueVolumeSlider(Number(localStorage.getItem("zing-volume")))
-    } else {
-      setValueVolumeSlider(0)
-      if(auRef) {
-        auRef.volume = 0
-      }
-    }
-  }
 
   const handlePlaySong = () => {
     if(isIconPlay === true) {
@@ -63,26 +40,26 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
     }
   }
 
-  let volumeUI
+  // let volumeUI
 
-  if (valueVolumeSlider == 0) {
-    volumeUI =
-      <button className={"mx-2 my-0 " + styleButtons} title="Mute">
-        <IconVolumeMute setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
-      </button>
-  }
-  if(valueVolumeSlider > 0) {
-    volumeUI =
-      <button className={"mx-2 my-0 " + styleButtons} title="Mute">
-        <IconVolumeHalf setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
-      </button>
-  }
-  if(valueVolumeSlider > 0.5) {
-    volumeUI =
-      <button className={"mx-2 my-0 " + styleButtons} title="Mute">
-        <IconVolume setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
-      </button>
-  }
+  // if (valueVolumeSlider == 0) {
+  //   volumeUI =
+  //     <button className={"mx-2 my-0 " + styleButtons} title="Mute">
+  //       <IconVolumeMute setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
+  //     </button>
+  // }
+  // if(valueVolumeSlider > 0) {
+  //   volumeUI =
+  //     <button className={"mx-2 my-0 " + styleButtons} title="Mute">
+  //       <IconVolumeHalf setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
+  //     </button>
+  // }
+  // if(valueVolumeSlider > 0.5) {
+  //   volumeUI =
+  //     <button className={"mx-2 my-0 " + styleButtons} title="Mute">
+  //       <IconVolume setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
+  //     </button>
+  // }
 
   return (
     <div className="grid grid-cols-3 h-full mx-[10vw] z-[-1]">
@@ -140,120 +117,23 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
         <button className={"mx-2 my-0 " + styleButtons} title="Shuffle">
           <IconShuffle setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
         </button>
-        <div onClick={ handleMuteVolume } >
-          { volumeUI }
-        </div>
+        {/* <div onClick={ handleMuteVolume } > */}
+          {/* { volumeUI } */}
+        {/* </div> */}
         {/* Volume Slider */}
-        <div
-          className="w-[84px] cursor-pointer relative"
-          // onMouseOver={ () => handleActiveDotSlider(true)}
-          // onMouseOut={ () => handleActiveDotSlider(false)}
-        >
-          <div
-            className="py-[6px] px-0"
-            onMouseOver={() => handleActiveDotVolumeSlider(true)}
-            onMouseOut={() => handleActiveDotVolumeSlider(false)}
-            ref={sliderVolumeRef}
-            onMouseDown={(e) => {
-              // console.log("Mouse Down")
-
-              /*
-                               |<- Slider Volume ->|
-                |--------------|------|------------|---|
-                ^              ^      ^            ^
-                |---Bounding---|      |            |
-                |______________|___clientX         |
-                               |Slider Offset Width|
-              */
-
-              if(sliderVolumeRef.current) {
-                let percentSliderVolumeWidth  = ((e.clientX - sliderVolumeRef.current.getBoundingClientRect().left) / sliderVolumeRef.current.offsetWidth) * 100
-                if(auRef) {
-                  if(percentSliderVolumeWidth < 0) {
-                    setValueVolumeSlider(0)
-                    localStorage.setItem("zing-volume", String(0))
-                    auRef.volume = 0
-                  }
-                  if(percentSliderVolumeWidth > 100) {
-                    localStorage.setItem("zing-volume", String(1))
-                    setValueVolumeSlider(1)
-                    auRef.volume = 1
-                  }
-                  if(percentSliderVolumeWidth > 0 && percentSliderVolumeWidth < 100) {
-                    localStorage.setItem("zing-volume", String(percentSliderVolumeWidth / 100))
-                    setValueVolumeSlider(percentSliderVolumeWidth / 100)
-                    auRef.volume = percentSliderVolumeWidth / 100
-                  }
-                }
+          <Slider
+            setWidth={"84px"}
+            setHeight={"4px"}
+            percentSlider={valueVolumeSlider}
+            toogleTooltip={false}
+            getPercentSlider={(value: number) => {
+              if(auRef) {
+                localStorage.setItem("zing-volume", String(value / 100))
+                setValueVolumeSlider(value)
+                auRef.volume = value / 100
               }
-
-              const handleMouseMove = (e: MouseEvent) => {
-                // console.log("Mouse Move")
-                if(sliderVolumeRef.current) {
-                  let percentSliderVolumeWidth  = ((e.clientX - sliderVolumeRef.current.getBoundingClientRect().left) / sliderVolumeRef.current.offsetWidth) * 100
-                  if(auRef) {
-                    if(percentSliderVolumeWidth < 0) {
-                      setValueVolumeSlider(0)
-                      auRef.volume = 0
-                    }
-                    if(percentSliderVolumeWidth > 100) {
-                      setValueVolumeSlider(1)
-                      auRef.volume = 1
-                    }
-                    if(percentSliderVolumeWidth > 0 && percentSliderVolumeWidth < 100) {
-                      setValueVolumeSlider(percentSliderVolumeWidth / 100)
-                      auRef.volume = percentSliderVolumeWidth / 100
-                    }
-                  }
-                }
-              }
-
-              // Add Event Mouse Move
-              window.addEventListener("mousemove", handleMouseMove)
-
-              // Add Event Mouse Up
-              window.addEventListener(
-                "mouseup",
-                () => {
-                // Remove Event Mouse Move
-                  window.removeEventListener("mousemove", handleMouseMove)
-                }
-              )
             }}
-          >
-            {/* React Volume Slider Rail */}
-            <div className="w-full bg-[hsla(0,0%,50.2%,.18)] rounded-[15px] h-1">
-              {/* Slider Progress
-                Change Progress -> width: 23%
-              */}
-              <div
-                className="h-full top-0 left-0 transition-[width] bg-[color:var(--color-primary)] rounded-[15px]"
-                style={{
-                  width: `${valueVolumeSlider * 100}%`
-                }}
-              >
-              </div>
-              {/* End Slider Progress */}
-
-              {/* Volume Slider Dot
-                Change Volume -> left: 23%
-              */}
-              <div
-                className="absolute w-3 h-3 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  left: `${valueVolumeSlider * 100}%`
-                }}
-              >
-                {/* Dot Handle */}
-                <div className={"w-full h-full rounded-full bg-[#fff] box-border " + (isActiveDotVolumeSliderHover ? "visible" : "invisible")}>
-                </div>
-                {/* End Dot Handle */}
-              </div>
-              {/* End Volume Slider Dot */}
-              </div>
-              {/* End React Volume Slider Rail */}
-          </div>
-        </div>
+          />
         {/* End Volume Slider */}
         <button className={"mx-2 my-0 " + styleButtons} title="Volume">
           <IconArrowUp setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
