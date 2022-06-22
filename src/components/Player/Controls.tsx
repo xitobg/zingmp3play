@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 import IconPrevious from "../Icons/Previous"
 import IconPlay from "../Icons/Play"
 import IconPause from "../Icons/Pause"
@@ -8,7 +8,6 @@ import IconRepeat from "../Icons/Repeat"
 import IconShuffle from "../Icons/Shuffle"
 import IconVolume from "../Icons/Volume"
 import IconVolumeMute from "../Icons/VolumeMute"
-import IconVolumeHalf from "../Icons/VolumeHalf"
 import IconArrowUp from "../Icons/ArrowUp"
 import Slider from "../Player/Slider"
 
@@ -21,11 +20,34 @@ interface controlsProps {
 
 const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRef }) => {
 
+  // Style Buttons
   const styleButtons = "p-2 flex justify-center items-center bg-transparent rounded-[25%] transition-all duration-200 hover:bg-[color:var(--color-secondary-bg-for-transparent)]"
 
+  // Value Volume
   const [valueVolumeSlider, setValueVolumeSlider] = useState<number>((Number(localStorage.getItem("zing-volume")) * 100) || 0.5 * 100)
+
+  // Active Play & Pause
   const [isIconPlay, setIconPlay] = useState<boolean>(false)
 
+  // Handle Mute Volume
+  const handleMuteVolume = () => {
+
+    // valueVolume(0 -> 1)
+    const toogleVolume = (valueVolume: number) => {
+      if(auRef) {
+        auRef.volume = valueVolume
+        setValueVolumeSlider(valueVolume * 100)
+      }
+    }
+
+    valueVolumeSlider !== 0
+    ?
+      toogleVolume(0)
+    :
+      toogleVolume(Number(localStorage.getItem("zing-volume")))
+  }
+
+  // Handle Play Button
   const handlePlaySong = () => {
     if(isIconPlay === true) {
       setIconPlay(false)
@@ -39,27 +61,6 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
       }
     }
   }
-
-  // let volumeUI
-
-  // if (valueVolumeSlider == 0) {
-  //   volumeUI =
-  //     <button className={"mx-2 my-0 " + styleButtons} title="Mute">
-  //       <IconVolumeMute setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
-  //     </button>
-  // }
-  // if(valueVolumeSlider > 0) {
-  //   volumeUI =
-  //     <button className={"mx-2 my-0 " + styleButtons} title="Mute">
-  //       <IconVolumeHalf setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
-  //     </button>
-  // }
-  // if(valueVolumeSlider > 0.5) {
-  //   volumeUI =
-  //     <button className={"mx-2 my-0 " + styleButtons} title="Mute">
-  //       <IconVolume setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
-  //     </button>
-  // }
 
   return (
     <div className="grid grid-cols-3 h-full mx-[10vw] z-[-1]">
@@ -117,9 +118,25 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
         <button className={"mx-2 my-0 " + styleButtons} title="Shuffle">
           <IconShuffle setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
         </button>
-        {/* <div onClick={ handleMuteVolume } > */}
-          {/* { volumeUI } */}
-        {/* </div> */}
+
+        {/* Volume */}
+        <div
+          onClick={handleMuteVolume}
+        >
+          {
+            valueVolumeSlider === 0
+            ?
+              <button className={"mx-2 my-0 " + styleButtons} title="Mute">
+                <IconVolumeMute setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
+              </button>
+            :
+              <button className={"mx-2 my-0 " + styleButtons} title="Mute">
+                <IconVolume setColor="var(--color-text)" setWidth="16px" setHeight="16px" />
+              </button>
+          }
+        </div>
+        {/* End Volume */}
+
         {/* Volume Slider */}
           <Slider
             setWidth={"84px"}

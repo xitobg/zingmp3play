@@ -1,14 +1,11 @@
 import React, { useEffect, useState, useRef } from "react"
 import Slider from "./Slider"
 import Controls from "./Controls"
-import { getSong, getInfoSong } from "../../api/song"
+import { getInfoSongPlayer } from "../../api/song"
 
 const Player:React.FC = () => {
 
-  const [dataSong, setDataSong] = useState<string>("")
-  const [songThumbnail, setSongThumbnail] = useState<string>("")
-  const [songTitle, setSongTitle] = useState<string>("")
-  const [songArtistsNames, setSongArtistsNames] = useState<string>("")
+  const [datainfoSongPlayer, setDatainfoSongPlayer] = useState<object | any>()
 
   const [currentTime, setCurrentTime] = useState<number>(0)
   const [duration, setDuration] = useState<number>(0)
@@ -18,12 +15,8 @@ const Player:React.FC = () => {
   useEffect(() => {
     (
       async () => {
-        const infosong  = await getInfoSong("ZZCZCWCW")
-        const data = await getSong("ZZCZCWCW")
-        setSongThumbnail(infosong.thumbnail)
-        setSongTitle(infosong.title)
-        setSongArtistsNames(infosong.artistsNames)
-        setDataSong(data[128])
+        // console.log(await getInfoSongPlayer("ZUUECEIC"))
+        setDatainfoSongPlayer(await getInfoSongPlayer("ZUUECEIC"))
       }
     )()
   }, [])
@@ -36,7 +29,7 @@ const Player:React.FC = () => {
         <Slider
           setWidth={"100%"}
           setHeight={"2px"}
-          percentSlider={ (audioRef.current.currentTime / audioRef.current.duration) * 100 }
+          percentSlider={ (currentTime / duration) * 100 }
           getPercentSlider={(value: number) => {
             if(audioRef.current) {
               audioRef.current.currentTime = (value / 100) * audioRef.current.duration
@@ -47,29 +40,35 @@ const Player:React.FC = () => {
         />
       }
 
-      <Controls
-        thumbnail={songThumbnail}
-        title={songTitle}
-        artistsNames={songArtistsNames}
-        auRef={audioRef.current}
-      />
+      {
+        datainfoSongPlayer &&
+        <Controls
+          thumbnail={datainfoSongPlayer.thumbnail}
+          title={datainfoSongPlayer.title}
+          artistsNames={datainfoSongPlayer.artistsNames}
+          auRef={audioRef.current}
+        />
+      }
 
-      <audio
-        ref={audioRef}
-        src={dataSong}
-        className="hidden"
-        onTimeUpdate = {() => {
-            if(audioRef.current) {
-              setCurrentTime(audioRef.current.currentTime)
+      {
+        datainfoSongPlayer &&
+        <audio
+          ref={audioRef}
+          src={datainfoSongPlayer.linkSong}
+          className="hidden"
+          onTimeUpdate = {() => {
+              if(audioRef.current) {
+                setCurrentTime(audioRef.current.currentTime)
+              }
             }
           }
-        }
-        onLoadedData = {() => {
-            if(audioRef.current) {
-              setDuration(audioRef.current.duration)
-            }
-        }}
-      />
+          onLoadedData = {() => {
+              if(audioRef.current) {
+                setDuration(audioRef.current.duration)
+              }
+          }}
+        />
+      }
     </div>
 
   )

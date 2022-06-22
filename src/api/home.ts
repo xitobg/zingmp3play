@@ -16,7 +16,6 @@ const getHomeApiPlayList = async (page: number): Promise<any> => {
     )
     let customData:Array<object> = []
     data.items.forEach((element) => {
-      console.log()
       if(element.sectionType === "playlist") {
         customData.push(element)
       }
