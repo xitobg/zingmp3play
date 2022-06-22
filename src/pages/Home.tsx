@@ -7,13 +7,13 @@ const Home: React.FC = () => {
 
   const [dataHome, setdataHome] = useState<Array<object>>()
 
-  useEffect(() => {
-    (
-      async () => {
-        setdataHome(await getDataHome())
-      }
-    )()
-  }, [])
+  // useEffect(() => {
+  //   (
+  //     async () => {
+  //       setdataHome(await getDataHome())
+  //     }
+  //   )()
+  // }, [])
 
   return (
     <>

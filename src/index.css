@@ -22,6 +22,11 @@ body {
 }
 
 ::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+::-webkit-scrollbar {
   width: 8px;
   overflow: auto;
 }
@@ -34,4 +39,9 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(128, 128, 128, 0.7);
+}
+*/
+
+.style__buttons {
+  @apply p-2 flex justify-center items-center bg-transparent rounded-[25%] transition-all duration-200 hover:bg-[color:var(--color-secondary-bg-for-transparent)]
 }

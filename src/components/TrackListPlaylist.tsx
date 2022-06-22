@@ -1,12 +1,9 @@
-import React, { useContext } from "react"
+import React from "react"
 import { TrackListDetailPlaylistProps } from "../utils/types"
 import { Link } from "react-router-dom"
 import { formatTime } from "../utils/formatTime"
-import { PlayerContext } from "../context/PlayerContext"
 
 const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items }) => {
-
-  const { setSongId } = useContext(PlayerContext)
 
   return (
     <div>
@@ -17,7 +14,6 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
               className={"flex items-center p-2 rounded-lg hover:bg-[color:var(--color-secondary-bg)] transition-all duration-300 " + (e.streamingStatus === 1 ? "cursor-pointer" : "cursor-default hover:bg-current")}
               onClick={() => {
                 if(e.streamingStatus === 1) {
-                  setSongId(e.encodeId)
                 }
               }}
             >
