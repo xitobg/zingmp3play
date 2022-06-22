@@ -15,7 +15,7 @@ const App: React.FC = () => {
         songId: playerId,
         setSongId: (e:any) => {setPlayerId(e)},
         iconPlay: iconPlay,
-        setIconPlay: (e:any) => {setIconPlay(e); console.log(e)},
+        setIconPlay: (e:any) => {setIconPlay(e)},
       }}
     >
       <Navbar />

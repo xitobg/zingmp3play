@@ -14,14 +14,12 @@ const Player:React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const player = useContext(PlayerContext)
-  // const { iconPlay, songId } = useContext(PlayerContext)
 
   useEffect(() => {
     (
       async () => {
         // console.log(await getInfoSongPlayer("ZUUECEIC"))
-        // console.log(player.songId )
-        setDatainfoSongPlayer(await getInfoSongPlayer(player.songId))
+        setDatainfoSongPlayer(await getInfoSongPlayer(player.songId));
       }
     )()
   }, [player.songId])

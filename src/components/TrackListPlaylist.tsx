@@ -6,7 +6,7 @@ import { PlayerContext } from "../context/PlayerContext"
 
 const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items }) => {
 
-  const { setSongId, setIconPlay } = useContext(PlayerContext)
+  const { setSongId } = useContext(PlayerContext)
 
   return (
     <div>
@@ -18,7 +18,6 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
               onClick={() => {
                 if(e.streamingStatus === 1) {
                   setSongId(e.encodeId)
-                  setIconPlay(true)
                 }
               }}
             >

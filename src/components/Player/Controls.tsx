@@ -45,22 +45,22 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
       toogleVolume(Number(localStorage.getItem("zing-volume")))
   }
 
+  const { setIconPlay, iconPlay} = useContext(PlayerContext)
+
   // Handle Play Button
   const handlePlaySong = () => {
-    if(iconPlay === true) {
-      setIconPlay(false)
-      if(auRef) {
-        auRef.pause()
-      }
-    } else {
+    if(iconPlay === false) {
       setIconPlay(true)
       if(auRef) {
         auRef.play()
       }
+    } else {
+      setIconPlay(false)
+      if(auRef) {
+        auRef.pause()
+      }
     }
   }
-
-  const { setIconPlay, iconPlay} = useContext(PlayerContext)
 
   return (
     <div className="grid grid-cols-3 h-full mx-[10vw] z-[-1]">
