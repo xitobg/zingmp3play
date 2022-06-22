@@ -1,20 +1,23 @@
 import React from "react"
 import Slider from "../Slider"
+import { useAppSelector } from "../../../hooks/redux"
 
-const SongSliderControl: React.FC = () => {
+const SongSliderControl: React.FC<{auRef: HTMLAudioElement | null | undefined}>  = ({ auRef }) => {
+
+  const currentTime = useAppSelector((state) => state.audio.currentTime)
+  const duration = useAppSelector((state) => state.audio.duration)
+
   return(
     <Slider
       setWidth={"100%"}
       setHeight={"2px"}
-      percentSlider={23}
+      percentSlider={(currentTime/duration)*100}
       toogleTooltip={true}
       currentTimeSongTooltip={100}
       getPercentSlider={(value: number) => {
-        // if(auRef) {
-        //   localStorage.setItem("zing-volume", String(value / 100))
-        //   setValueVolumeSlider(value)
-        //   auRef.volume = value / 100
-        // }
+        if(auRef) {
+          auRef.currentTime = (value / 100) * auRef.duration
+        }
       }}
     />
   )

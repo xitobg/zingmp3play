@@ -4,15 +4,23 @@ import IconPause from "../../Icons/Pause"
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux"
 import { changeIconPlay } from "../../../redux/features/audioSlice"
 
-const PlayControl:React.FC = () => {
+const PlayControl:React.FC<{auRef: HTMLAudioElement | null | undefined}> = ({ auRef }) => {
 
   const isPlay = useAppSelector((state) => state.audio.isPlay)
   const dispatch = useAppDispatch()
 
   const handlePlaySong = () => {
-    isPlay
-    ? dispatch(changeIconPlay( false ))
-    : dispatch(changeIconPlay( true ))
+    if(isPlay === true) {
+      dispatch(changeIconPlay( false ))
+      if(auRef) {
+        auRef.pause()
+      }
+    } else {
+      dispatch(changeIconPlay( true ))
+      if(auRef) {
+        auRef.play()
+      }
+    }
   }
 
   return (

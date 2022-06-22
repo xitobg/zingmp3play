@@ -10,11 +10,11 @@ import VolumeControl from "./VolumeControl"
 import VolumeSliderControl from "./VolumeSliderControl"
 import SongSliderControl from "./SongSliderControl"
 
-const Control:React.FC = () => {
+const Control:React.FC<{auRef: HTMLAudioElement | null | undefined}> = ({ auRef }) => {
 
   return (
     <>
-      <SongSliderControl />
+      <SongSliderControl auRef={auRef}/>
 
       <div className="grid grid-cols-3 h-full mx-[10vw] z-[-1]">
         {/* Track Info */}
@@ -24,7 +24,7 @@ const Control:React.FC = () => {
         {/* Mid Controls Button */}
         <div className="flex justify-center items-center">
           <PreviousControl />
-          <PlayControl />
+          <PlayControl auRef={auRef}/>
           <NextControl />
         </div>
         {/* End Mid Controls Button */}
