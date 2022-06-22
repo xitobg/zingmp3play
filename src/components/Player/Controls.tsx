@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import IconPrevious from "../Icons/Previous"
 import IconPlay from "../Icons/Play"
 import IconPause from "../Icons/Pause"
@@ -10,6 +10,7 @@ import IconVolume from "../Icons/Volume"
 import IconVolumeMute from "../Icons/VolumeMute"
 import IconArrowUp from "../Icons/ArrowUp"
 import Slider from "../Player/Slider"
+import { PlayerContext } from "../../context/PlayerContext"
 
 interface controlsProps {
   thumbnail: string
@@ -25,9 +26,6 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
 
   // Value Volume
   const [valueVolumeSlider, setValueVolumeSlider] = useState<number>((Number(localStorage.getItem("zing-volume")) * 100) || 0.5 * 100)
-
-  // Active Play & Pause
-  const [isIconPlay, setIconPlay] = useState<boolean>(false)
 
   // Handle Mute Volume
   const handleMuteVolume = () => {
@@ -49,7 +47,7 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
 
   // Handle Play Button
   const handlePlaySong = () => {
-    if(isIconPlay === true) {
+    if(iconPlay === true) {
       setIconPlay(false)
       if(auRef) {
         auRef.pause()
@@ -61,6 +59,8 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
       }
     }
   }
+
+  const { setIconPlay, iconPlay} = useContext(PlayerContext)
 
   return (
     <div className="grid grid-cols-3 h-full mx-[10vw] z-[-1]">
@@ -95,7 +95,7 @@ const Controls:React.FC<controlsProps> = ({ thumbnail, title, artistsNames, auRe
           onClick={ handlePlaySong }
         >
           {
-            isIconPlay
+            iconPlay
             ? <IconPause setColor="white" setWidth="24px" setHeight="24px"/>
             : <IconPlay setColor="white" setWidth="24px" setHeight="24px"/>
           }
