@@ -5,6 +5,7 @@ interface AudioState {
   isMute: boolean
   songId: string
   infoSongPlayer: {}
+  srcAudio: string
   currentTime: number
   duration: number
   volume: number
@@ -16,6 +17,7 @@ const initialState: AudioState = {
   isMute: false,
   songId: "ZUB790F8",
   infoSongPlayer: {},
+  srcAudio: "",
   currentTime: 0,
   duration: 0,
   volume: Number(localStorage.getItem("zing-volume")) || 0.5,
@@ -37,6 +39,9 @@ const audioSlice = createSlice({
     },
     setInfoSongPlayer: (state, action: PayloadAction<object>) => {
       state.infoSongPlayer = action.payload
+    },
+    setSrcAudio: (state, action: PayloadAction<string>) => {
+      state.srcAudio = action.payload
     },
     setCurrentTime: (state, action: PayloadAction<number>) => {
       state.currentTime = action.payload
@@ -62,5 +67,6 @@ export const {
   setDuration,
   setVolume,
   setLoop,
+  setSrcAudio,
 } = audioSlice.actions
 export default audioSlice.reducer

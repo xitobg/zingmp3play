@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react"
 import Controls from "./Control"
-import { getInfoSongPlayer } from "../../api/song"
+import { getSong, getInfoSong } from "../../api/song"
 import { useAppSelector, useAppDispatch } from "../../hooks/redux"
-import { setInfoSongPlayer, setCurrentTime, setDuration } from "../../redux/features/audioSlice"
+import { setInfoSongPlayer, setCurrentTime, setDuration, setSrcAudio } from "../../redux/features/audioSlice"
 
 const Player:React.FC = () => {
 
   const songId = useAppSelector((state) => state.audio.songId)
-  const info:any = useAppSelector((state) => state.audio.infoSongPlayer)
+  const srcAudio = useAppSelector((state) => state.audio.srcAudio)
   const isLoop = useAppSelector((state) => state.audio.isLoop)
   const dispath = useAppDispatch()
 
@@ -16,9 +16,9 @@ const Player:React.FC = () => {
   useEffect(() => {
     (
       async () => {
-        dispath(setInfoSongPlayer(
-          (await getInfoSongPlayer(songId))
-        ))
+        const src = await getSong(songId)
+        src[128] ? dispath(setSrcAudio( src[128] )) : dispath(setSrcAudio(""))
+        dispath(setInfoSongPlayer(await getInfoSong(songId)))
       }
     )()
   }, [songId, dispath])
@@ -37,7 +37,7 @@ const Player:React.FC = () => {
 
       <audio
         ref={audioRef}
-        src={info.linkSong}
+        src={srcAudio}
         className="hidden"
         loop={isLoop}
         onTimeUpdate = {() => {

@@ -26,38 +26,4 @@ const getInfoSong = async (id: string): Promise<any> => {
   }
 }
 
-interface typeCustomData {
-  [key: string]: string
-}
-
-const getInfoSongPlayer = async (id: string): Promise<any> => {
-
-  let customData:typeCustomData = {}
-
-  await Promise.all([
-    getSong(id),
-    getInfoSong(id)
-  ]).then((data) => {
-    // console.log(data)
-    data.forEach((e) => {
-      if(e[128]) {
-        customData["linkSong"] = e[128]
-      }
-      if(e.title) {
-        customData["title"] = e.title
-      }
-      if(e.artistsNames) {
-        customData["artistsNames"] = e.artistsNames
-      }
-      if(e.thumbnail) {
-        customData["thumbnail"] = e.thumbnail
-      }
-    })
-  }).catch((err) => {
-    console.log(err)
-  })
-
-  return customData
-}
-
-export { getSong, getInfoSong, getInfoSongPlayer }
+export { getSong, getInfoSong }

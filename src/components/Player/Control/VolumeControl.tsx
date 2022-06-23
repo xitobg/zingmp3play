@@ -7,7 +7,7 @@ import { changeIconVolume, setVolume } from "../../../redux/features/audioSlice"
 const VolumeControl: React.FC<{auRef: HTMLAudioElement | null}> = ({auRef}) => {
 
   const isMute = useAppSelector((state) => state.audio.isMute)
-  const volume = useAppSelector((state) => state.audio.volume)
+  // const volume = useAppSelector((state) => state.audio.volume)
   const dispatch = useAppDispatch()
 
   const handleMuteVolume = () => {

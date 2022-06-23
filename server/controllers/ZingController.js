@@ -15,7 +15,7 @@ class ZingController {
   }
 
   getHome(req, res) {
-    ZingMp3.getHome(req.query.page).then((data) => {
+    ZingMp3.getHome().then((data) => {
       res.json(data)
     })
   }
