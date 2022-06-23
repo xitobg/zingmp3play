@@ -13,6 +13,7 @@ interface AudioState {
   isLoop: boolean
   autoPlay: boolean
   playlistSong: Array<object>
+  isLyrics: boolean
 }
 
 const initialState: AudioState = {
@@ -32,6 +33,7 @@ const initialState: AudioState = {
   isLoop: false,
   autoPlay: false,
   playlistSong: [],
+  isLyrics: false
 }
 
 const audioSlice = createSlice({
@@ -75,6 +77,9 @@ const audioSlice = createSlice({
     setCurrnetIndexPlaylist: (state, action: PayloadAction<number>) => {
       state.currnetIndexPlaylist = action.payload
     },
+    setOpenLyrics: (state, action: PayloadAction<boolean>) => {
+      state.isLyrics = action.payload
+    },
   }
 })
 
@@ -91,5 +96,6 @@ export const {
   setAutoPlay,
   setPlaylistSong,
   setCurrnetIndexPlaylist,
+  setOpenLyrics,
 } = audioSlice.actions
 export default audioSlice.reducer

@@ -10,6 +10,7 @@ import {
   changeIconPlay,
 } from "../../redux/features/audioSlice"
 import { setSongId, setCurrnetIndexPlaylist } from "../../redux/features/audioSlice"
+import Lyric from "./Lyrics"
 
 const Player:React.FC = () => {
 
@@ -107,6 +108,9 @@ const Player:React.FC = () => {
           }
         }}
       />
+
+      <Lyric />
+
     </>
   )
 }
