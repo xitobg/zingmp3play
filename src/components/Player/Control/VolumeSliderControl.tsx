@@ -16,7 +16,7 @@ const VolumeSliderControl: React.FC<{auRef: HTMLAudioElement | null | undefined}
       toogleTooltip={false}
       getPercentSlider={(value: number) => {
         if(auRef) {
-          localStorage.setItem("zing-volume", String(value / 100))
+          localStorage.setItem("volume", String(value / 100))
           dispath(setVolume(
             value / 100
           ))

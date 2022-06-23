@@ -14,10 +14,10 @@ const VolumeControl: React.FC<{auRef: HTMLAudioElement | null}> = ({auRef}) => {
     if(isMute) {
       dispatch(changeIconVolume(false))
       dispatch(setVolume(
-        Number(localStorage.getItem("zing-volume"))
+        Number(localStorage.getItem("volume"))
       ))
       if(auRef) {
-        auRef.volume = Number(localStorage.getItem("zing-volume"))
+        auRef.volume = Number(localStorage.getItem("volume"))
       }
     } else {
       dispatch(changeIconVolume(true))

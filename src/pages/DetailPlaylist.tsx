@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom"
 import { getDetailPlaylist } from "../api/detailPlaylist"
 import DetailPlaylistInfo from "../components/DetailPlaylistInfo"
 import TrackListDetailPlaylist from "../components/TrackListPlaylist"
+import { useAppDispatch } from "../hooks/redux"
+import { setPlaylistSong } from "../redux/features/audioSlice"
 
 const Playlist: React.FC = () => {
 
@@ -10,13 +12,17 @@ const Playlist: React.FC = () => {
 
   const params:any = useParams()
 
+  const dispatch = useAppDispatch()
+
   useEffect(() => {
     (
       async () => {
-        setDataDetailPlaylist(await getDetailPlaylist(params.playlistId))
+        const detailPlaylist = await getDetailPlaylist(params.playlistId)
+        setDataDetailPlaylist(detailPlaylist)
+        dispatch(setPlaylistSong(detailPlaylist.items))
       }
     )()
-  }, [params])
+  }, [params, dispatch])
 
   return (
     <>

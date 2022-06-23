@@ -3,25 +3,33 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 interface AudioState {
   isPlay: boolean
   isMute: boolean
-  songId: string
-  infoSongPlayer: {}
+  songId: string | null
+  infoSongPlayer: object
   srcAudio: string
   currentTime: number
   duration: number
   volume: number
   isLoop: boolean
+  autoPlay: boolean
+  playlistSong: object
 }
 
 const initialState: AudioState = {
   isPlay: false,
   isMute: false,
-  songId: "ZUB790F8",
-  infoSongPlayer: {},
+  songId: localStorage.getItem("songId"),
+  infoSongPlayer: {
+    title: "",
+    thumbnail: "",
+    artistsNames: "",
+  },
   srcAudio: "",
   currentTime: 0,
   duration: 0,
-  volume: Number(localStorage.getItem("zing-volume")) || 0.5,
-  isLoop: false
+  volume: Number(localStorage.getItem("volume")) || 0.5,
+  isLoop: false,
+  autoPlay: false,
+  playlistSong: {},
 }
 
 const audioSlice = createSlice({
@@ -38,7 +46,7 @@ const audioSlice = createSlice({
       state.songId = action.payload
     },
     setInfoSongPlayer: (state, action: PayloadAction<object>) => {
-      state.infoSongPlayer = action.payload
+      state.infoSongPlayer = { ...action.payload }
     },
     setSrcAudio: (state, action: PayloadAction<string>) => {
       state.srcAudio = action.payload
@@ -54,7 +62,13 @@ const audioSlice = createSlice({
     },
     setLoop: (state, action: PayloadAction<boolean>) => {
       state.isLoop = action.payload
-    }
+    },
+    setAutoPlay: (state, action: PayloadAction<boolean>) => {
+      state.autoPlay = action.payload
+    },
+    setPlaylistSong: (state, action: PayloadAction<object>) => {
+      state.playlistSong = action.payload
+    },
   }
 })
 
@@ -68,5 +82,7 @@ export const {
   setVolume,
   setLoop,
   setSrcAudio,
+  setAutoPlay,
+  setPlaylistSong,
 } = audioSlice.actions
 export default audioSlice.reducer

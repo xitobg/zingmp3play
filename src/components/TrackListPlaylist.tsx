@@ -2,8 +2,12 @@ import React from "react"
 import { TrackListDetailPlaylistProps } from "../utils/types"
 import { Link } from "react-router-dom"
 import { formatTime } from "../utils/formatTime"
+import { useAppDispatch } from "../hooks/redux"
+import { setSongId, changeIconPlay, setAutoPlay } from "../redux/features/audioSlice"
 
 const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items }) => {
+
+  const dispatch = useAppDispatch()
 
   return (
     <div>
@@ -14,6 +18,12 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
               className={"flex items-center p-2 rounded-lg hover:bg-[color:var(--color-secondary-bg)] transition-all duration-300 " + (e.streamingStatus === 1 ? "cursor-pointer" : "cursor-default hover:bg-current")}
               onClick={() => {
                 if(e.streamingStatus === 1) {
+                  dispatch(setSongId(
+                    e.encodeId
+                  ))
+                  localStorage.setItem("songId", e.encodeId)
+                  dispatch(changeIconPlay(true))
+                  dispatch(setAutoPlay(true))
                 }
               }}
             >

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import PlaylistCover from "../components/PlaylistCover"
-// import ArtistCover from "../components/ArtistCover"
 import { getHomePlayList } from "../api/home"
 
 const Home: React.FC = () => {

@@ -2,7 +2,13 @@ import React, { useEffect, useRef } from "react"
 import Controls from "./Control"
 import { getSong, getInfoSong } from "../../api/song"
 import { useAppSelector, useAppDispatch } from "../../hooks/redux"
-import { setInfoSongPlayer, setCurrentTime, setDuration, setSrcAudio } from "../../redux/features/audioSlice"
+import {
+  setInfoSongPlayer,
+  setCurrentTime,
+  setDuration,
+  setSrcAudio,
+  changeIconPlay,
+} from "../../redux/features/audioSlice"
 
 const Player:React.FC = () => {
 
@@ -16,30 +22,41 @@ const Player:React.FC = () => {
   useEffect(() => {
     (
       async () => {
-        const src = await getSong(songId)
-        src[128] ? dispath(setSrcAudio( src[128] )) : dispath(setSrcAudio(""))
-        dispath(setInfoSongPlayer(await getInfoSong(songId)))
+        if(songId !== null && songId !== "") {
+          const src = await getSong(songId)
+          src[128] ? dispath(setSrcAudio( src[128] )) : dispath(setSrcAudio(""))
+          const infoSong = await getInfoSong(songId)
+          dispath(setInfoSongPlayer(
+            {
+              title: infoSong.title,
+              thumbnail: infoSong.thumbnail,
+              artistsNames: infoSong.artistsNames,
+            }
+          ))
+        }
       }
     )()
   }, [songId, dispath])
 
   return (
     <>
-      <div className="flex flex-col justify-around h-16 backdrop-saturate-[180%] backdrop-blur-[30px] bg-[color:var(--color-navbar-bg)] fixed inset-x-0 bottom-0 z-[100]">
         {
-          songId !== ""
+          songId
           ?
-          <Controls auRef={audioRef.current} />
+          <div className="flex flex-col justify-around h-16 backdrop-saturate-[180%] backdrop-blur-[30px] bg-[color:var(--color-navbar-bg)] fixed inset-x-0 bottom-0 z-[100]">
+            <Controls auRef={audioRef.current} />
+          </div>
           :
           ""
         }
-      </div>
 
       <audio
         ref={audioRef}
         src={srcAudio}
         className="hidden"
         loop={isLoop}
+        autoPlay={true}
+        hidden
         onTimeUpdate = {() => {
             if(audioRef.current) {
               dispath(setCurrentTime(
@@ -54,6 +71,12 @@ const Player:React.FC = () => {
                 (audioRef.current.duration)
               ))
             }
+        }}
+        onEnded = {() => {
+          if (!isLoop) {
+            dispath(setCurrentTime(0))
+            dispath(changeIconPlay(false))
+          }
         }}
       />
     </>
