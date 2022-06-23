@@ -9,6 +9,7 @@ import {
   setSrcAudio,
   changeIconPlay,
 } from "../../redux/features/audioSlice"
+import { setSongId, setCurrnetIndexPlaylist } from "../../redux/features/audioSlice"
 
 const Player:React.FC = () => {
 
@@ -16,6 +17,11 @@ const Player:React.FC = () => {
   const srcAudio = useAppSelector((state) => state.audio.srcAudio)
   const isLoop = useAppSelector((state) => state.audio.isLoop)
   const dispath = useAppDispatch()
+
+  const currnetIndexPlaylist = useAppSelector((state) => state.audio.currnetIndexPlaylist)
+  const playlistSong:any = useAppSelector((state) => state.audio.playlistSong)
+
+  const dispatch = useAppDispatch()
 
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
@@ -76,6 +82,28 @@ const Player:React.FC = () => {
           if (!isLoop) {
             dispath(setCurrentTime(0))
             dispath(changeIconPlay(false))
+
+            if(playlistSong !== undefined && playlistSong.length > 0) {
+
+              let currentIndex
+
+              if(currnetIndexPlaylist === playlistSong.length - 1) {
+                currentIndex = 0
+              } else {
+                currentIndex = currnetIndexPlaylist + 1
+              }
+
+              dispatch(setCurrnetIndexPlaylist(
+                currentIndex
+              ))
+
+              dispatch(setSongId(
+                playlistSong[currentIndex].encodeId
+              ))
+
+              dispatch(changeIconPlay(true))
+            }
+
           }
         }}
       />
