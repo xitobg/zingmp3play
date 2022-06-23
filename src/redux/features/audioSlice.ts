@@ -11,7 +11,7 @@ interface AudioState {
   volume: number
   isLoop: boolean
   autoPlay: boolean
-  playlistSong: object
+  playlistSong: Array<object>
 }
 
 const initialState: AudioState = {
@@ -29,7 +29,7 @@ const initialState: AudioState = {
   volume: Number(localStorage.getItem("volume")) || 0.5,
   isLoop: false,
   autoPlay: false,
-  playlistSong: {},
+  playlistSong: [],
 }
 
 const audioSlice = createSlice({
@@ -66,7 +66,8 @@ const audioSlice = createSlice({
     setAutoPlay: (state, action: PayloadAction<boolean>) => {
       state.autoPlay = action.payload
     },
-    setPlaylistSong: (state, action: PayloadAction<object>) => {
+    setPlaylistSong: (state, action: PayloadAction<Array<object>>) => {
+      // console.log(action.payload)
       state.playlistSong = action.payload
     },
   }

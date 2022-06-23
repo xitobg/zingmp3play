@@ -19,7 +19,7 @@ const Playlist: React.FC = () => {
       async () => {
         const detailPlaylist = await getDetailPlaylist(params.playlistId)
         setDataDetailPlaylist(detailPlaylist)
-        dispatch(setPlaylistSong(detailPlaylist.items))
+        dispatch(setPlaylistSong(detailPlaylist.song.items))
       }
     )()
   }, [params, dispatch])
