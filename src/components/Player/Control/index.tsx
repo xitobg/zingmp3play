@@ -10,7 +10,7 @@ import VolumeControl from "./VolumeControl"
 import VolumeSliderControl from "./VolumeSliderControl"
 import SongSliderControl from "./SongSliderControl"
 
-const Control:React.FC<{auRef: HTMLAudioElement | null | undefined}> = ({ auRef }) => {
+const Control:React.FC<{auRef: HTMLAudioElement | null}> = ({ auRef }) => {
 
   return (
     <>
@@ -24,7 +24,7 @@ const Control:React.FC<{auRef: HTMLAudioElement | null | undefined}> = ({ auRef 
         {/* Mid Controls Button */}
         <div className="flex justify-center items-center">
           <PreviousControl />
-          <PlayControl auRef={auRef}/>
+          <PlayControl auRef={auRef} />
           <NextControl />
         </div>
         {/* End Mid Controls Button */}
@@ -34,8 +34,8 @@ const Control:React.FC<{auRef: HTMLAudioElement | null | undefined}> = ({ auRef 
           <LyricControl />
           <RepeatControl />
           <ShuffleControl />
-          <VolumeControl />
-          <VolumeSliderControl />
+          <VolumeControl auRef={auRef} />
+          <VolumeSliderControl auRef={auRef} />
         </div>
         {/* End Right Controls Button */}
       </div>

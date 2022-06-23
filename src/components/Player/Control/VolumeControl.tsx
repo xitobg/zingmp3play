@@ -2,17 +2,30 @@ import React from "react"
 import IconVolume from "../../Icons/Volume"
 import IconVolumeMute from "../../Icons/VolumeMute"
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux"
-import { changeIconVolume } from "../../../redux/features/audioSlice"
+import { changeIconVolume, setVolume } from "../../../redux/features/audioSlice"
 
-const VolumeControl: React.FC = () => {
+const VolumeControl: React.FC<{auRef: HTMLAudioElement | null}> = ({auRef}) => {
 
   const isMute = useAppSelector((state) => state.audio.isMute)
+  const volume = useAppSelector((state) => state.audio.volume)
   const dispatch = useAppDispatch()
 
   const handleMuteVolume = () => {
-    isMute
-    ? dispatch(changeIconVolume(false))
-    : dispatch(changeIconVolume(true))
+    if(isMute) {
+      dispatch(changeIconVolume(false))
+      dispatch(setVolume(
+        Number(localStorage.getItem("zing-volume"))
+      ))
+      if(auRef) {
+        auRef.volume = Number(localStorage.getItem("zing-volume"))
+      }
+    } else {
+      dispatch(changeIconVolume(true))
+      dispatch(setVolume(0))
+      if(auRef) {
+        auRef.volume = 0
+      }
+    }
   }
 
   return (

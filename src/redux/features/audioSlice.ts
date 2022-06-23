@@ -7,15 +7,19 @@ interface AudioState {
   infoSongPlayer: {}
   currentTime: number
   duration: number
+  volume: number
+  isLoop: boolean
 }
 
 const initialState: AudioState = {
   isPlay: false,
   isMute: false,
-  songId: "ZZA9OZIO",
+  songId: "ZUB790F8",
   infoSongPlayer: {},
   currentTime: 0,
-  duration: 0
+  duration: 0,
+  volume: Number(localStorage.getItem("zing-volume")) || 0.5,
+  isLoop: false
 }
 
 const audioSlice = createSlice({
@@ -39,6 +43,12 @@ const audioSlice = createSlice({
     },
     setDuration: (state, action: PayloadAction<number>) => {
       state.duration = action.payload
+    },
+    setVolume: (state, action: PayloadAction<number>) => {
+      state.volume = action.payload
+    },
+    setLoop: (state, action: PayloadAction<boolean>) => {
+      state.isLoop = action.payload
     }
   }
 })
@@ -49,6 +59,8 @@ export const {
   setSongId,
   setInfoSongPlayer,
   setCurrentTime,
-  setDuration
+  setDuration,
+  setVolume,
+  setLoop,
 } = audioSlice.actions
 export default audioSlice.reducer

@@ -8,9 +8,10 @@ const Player:React.FC = () => {
 
   const songId = useAppSelector((state) => state.audio.songId)
   const info:any = useAppSelector((state) => state.audio.infoSongPlayer)
+  const isLoop = useAppSelector((state) => state.audio.isLoop)
   const dispath = useAppDispatch()
 
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     (
@@ -38,6 +39,7 @@ const Player:React.FC = () => {
         ref={audioRef}
         src={info.linkSong}
         className="hidden"
+        loop={isLoop}
         onTimeUpdate = {() => {
             if(audioRef.current) {
               dispath(setCurrentTime(
