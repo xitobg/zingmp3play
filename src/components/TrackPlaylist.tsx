@@ -2,10 +2,12 @@ import React from "react"
 import { TrackListDetailPlaylistProps } from "../utils/types"
 import { Link } from "react-router-dom"
 import { formatTime } from "../utils/formatTime"
-import { useAppDispatch } from "../hooks/redux"
+import { useAppDispatch, useAppSelector } from "../hooks/redux"
 import { setSongId, changeIconPlay, setAutoPlay, setCurrnetIndexPlaylist } from "../redux/features/audioSlice"
 
 const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items }) => {
+
+  const currnetIndexPlaylist = useAppSelector((state) => state.audio.currnetIndexPlaylist)
 
   const dispatch = useAppDispatch()
 
@@ -15,7 +17,7 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
         items.map((e: any, i:any) => {
           return (
             <div
-              className={"flex items-center p-2 rounded-lg hover:bg-[color:var(--color-secondary-bg)] transition-all duration-300 " + (e.streamingStatus === 1 ? "cursor-pointer" : "cursor-default hover:bg-current")}
+              className={"flex items-center p-2 rounded-lg transition-all duration-300 " + (e.streamingStatus === 1 ? "cursor-pointer" : "cursor-default hover:bg-current") + (currnetIndexPlaylist === i ? " bg-[color:var(--color-primary-bg)]" : " hover:bg-[color:var(--color-secondary-bg)]")}
               onClick={() => {
                 if(e.streamingStatus === 1) {
                   dispatch(setSongId(
@@ -33,9 +35,9 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
               {/* Title & Artist */}
               <div className="flex flex-1 flex-col">
                 {/* Title */}
-                <div className="text-[color:var(--color-text)] text-lg font-semibold truncate">{e.title}</div>
+                <div className={"text-lg font-semibold truncate " + (currnetIndexPlaylist === i ? " text-[color:var(--color-primary)]" : " text-[color:var(--color-text)]")}>{e.title}</div>
                 {/* Artist */}
-                <div className="mt-[2px] text-[color:var(--color-text)] text-sm opacity-70 truncate">
+                <div className={"mt-[2px] text-sm opacity-70 truncate " + (currnetIndexPlaylist === i ? " text-[color:var(--color-primary)]" : " text-[color:var(--color-text)]")}>
                   {
                     (e.artists || []).filter((element: any) => { return element !== undefined }).map((eArtist: any, iArtist: any) => {
                       return (
@@ -63,7 +65,7 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
               {/* End Show Song VIP */}
 
               {/* Show Time Deration */}
-              <div className="text-[color:var(--color-text)] font-medium">{formatTime(e.duration)}</div>
+              <div className={"font-medium " + (currnetIndexPlaylist === i ? " text-[color:var(--color-primary)]" : " text-[color:var(--color-text)]")}>{formatTime(e.duration)}</div>
               {/* End Show Time Deration */}
             </div>
           )
