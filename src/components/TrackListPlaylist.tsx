@@ -3,7 +3,7 @@ import { TrackListDetailPlaylistProps } from "../utils/types"
 import { Link } from "react-router-dom"
 import { formatTime } from "../utils/formatTime"
 import { useAppDispatch } from "../hooks/redux"
-import { setSongId, changeIconPlay, setAutoPlay } from "../redux/features/audioSlice"
+import { setSongId, changeIconPlay, setAutoPlay, setCurrnetIndexPlaylist } from "../redux/features/audioSlice"
 
 const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items }) => {
 
@@ -21,7 +21,7 @@ const TrackListDetailPlaylist: React.FC<TrackListDetailPlaylistProps> = ({ items
                   dispatch(setSongId(
                     e.encodeId
                   ))
-                  localStorage.setItem("songId", e.encodeId)
+                  dispatch(setCurrnetIndexPlaylist(i))
                   dispatch(changeIconPlay(true))
                   dispatch(setAutoPlay(true))
                 }

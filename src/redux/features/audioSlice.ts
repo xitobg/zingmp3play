@@ -4,6 +4,7 @@ interface AudioState {
   isPlay: boolean
   isMute: boolean
   songId: string | null
+  currnetIndexPlaylist: number
   infoSongPlayer: object
   srcAudio: string
   currentTime: number
@@ -18,6 +19,7 @@ const initialState: AudioState = {
   isPlay: false,
   isMute: false,
   songId: localStorage.getItem("songId"),
+  currnetIndexPlaylist: 0,
   infoSongPlayer: {
     title: "",
     thumbnail: "",
@@ -44,6 +46,7 @@ const audioSlice = createSlice({
     },
     setSongId: (state, action: PayloadAction<string>) => {
       state.songId = action.payload
+      localStorage.setItem("songId", action.payload)
     },
     setInfoSongPlayer: (state, action: PayloadAction<object>) => {
       state.infoSongPlayer = { ...action.payload }
@@ -67,8 +70,10 @@ const audioSlice = createSlice({
       state.autoPlay = action.payload
     },
     setPlaylistSong: (state, action: PayloadAction<Array<object>>) => {
-      // console.log(action.payload)
       state.playlistSong = action.payload
+    },
+    setCurrnetIndexPlaylist: (state, action: PayloadAction<number>) => {
+      state.currnetIndexPlaylist = action.payload
     },
   }
 })
@@ -85,5 +90,6 @@ export const {
   setSrcAudio,
   setAutoPlay,
   setPlaylistSong,
+  setCurrnetIndexPlaylist,
 } = audioSlice.actions
 export default audioSlice.reducer
