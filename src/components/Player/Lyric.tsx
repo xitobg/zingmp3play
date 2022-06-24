@@ -3,11 +3,13 @@ import { useAppSelector, useAppDispatch } from "../../hooks/redux"
 import { setOpenLyric } from "../../redux/features/audioSlice"
 import IconArrowDown from "../../components/Icons/ArrowDow"
 import useLyric from "../../hooks/lyric"
+import { formatTime } from "../../utils/formatTime"
 
 const Lyric:React.FC = () => {
 
   const isLyric = useAppSelector((state) => state.audio.isLyric)
   const songId = useAppSelector((state) => state.audio.songId)
+  const currentTime = useAppSelector((state) => state.audio.currentTime)
 
   // const [lyric, setLyric] = useState<Array<object> | undefined>()
 
@@ -35,7 +37,6 @@ const Lyric:React.FC = () => {
         {/* End Close Button */}
 
         {/* Lyric */}
-
         <div className="font-semibold text-[28px] text-[color:var(--color-text)] max-w-2xl mx-auto my-0 h-full flex flex-col overflow-y-auto">
 
           <div className="mt-[50vh]"></div>
@@ -43,8 +44,12 @@ const Lyric:React.FC = () => {
           {
             lyric &&
             lyric.map((e:any) => {
+              // {
+              //   console.log("1", formatTime(currentTime))
+              //   console.log("2", formatTime(e.startTime / 1000))
+              // }
               return (
-                <div className="my-[2px] mx-0 px-[18px] py-3 rounded-xl hover:bg-[color:var(--color-secondary-bg-for-transparent)] box-border">
+                <div className={"my-[2px] mx-0 px-[18px] py-3 rounded-xl hover:bg-[color:var(--color-secondary-bg-for-transparent)] box-border " + (formatTime(currentTime) === formatTime(e.startTime / 1000) ? "active__lyric" : "") }>
                   <span
                     className="cursor-pointer inline-block opacity-30"
                   >
