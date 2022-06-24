@@ -1,15 +1,15 @@
-import React, { useState ,useEffect } from "react"
+import React from "react"
 import { useAppSelector, useAppDispatch } from "../../hooks/redux"
 import { setOpenLyric } from "../../redux/features/audioSlice"
 import IconArrowDown from "../../components/Icons/ArrowDow"
-import { getLyric } from "../../api/lyric"
+import useLyric from "../../hooks/lyric"
 
 const Lyric:React.FC = () => {
 
   const isLyric = useAppSelector((state) => state.audio.isLyric)
   const songId = useAppSelector((state) => state.audio.songId)
 
-  const [lyric, setLyric] = useState<Array<object> | undefined>()
+  // const [lyric, setLyric] = useState<Array<object> | undefined>()
 
   const dispatch = useAppDispatch()
 
@@ -19,32 +19,7 @@ const Lyric:React.FC = () => {
     : dispatch(setOpenLyric(true))
   }
 
-  useEffect(() => {
-    (
-      async () => {
-        if(songId !== null && songId !== "") {
-          const dataLyric:any = await getLyric(songId)
-          // setLyric(dataLyric.sentences)
-          let lyr:Array<{ data: string; startTime: number; endTime: number}> = []
-          dataLyric.sentences.forEach((e:any) => {
-            let a:string = ""
-            let sTime:number = 0
-            let eTime:number = 0
-            e.words.forEach((el:any, ind:any) => {
-              a = a + el.data + " "
-              ind === 0 ? sTime = el.startTime : sTime = 0
-            })
-            lyr = lyr.concat({
-              startTime: sTime,
-              endTime: 0,
-              data: a
-            })
-          })
-          console.log(lyr)
-        }
-      }
-    )()
-  }, [songId])
+  const lyric = useLyric(songId)
 
   return (
     <>
@@ -65,19 +40,17 @@ const Lyric:React.FC = () => {
 
           <div className="mt-[50vh]"></div>
           {/* Line Lyric */}
-          {/*
-          <div className="my-[2px] mx-0 px-[18px] py-3 rounded-xl hover:bg-[color:var(--color-secondary-bg-for-transparent)] box-border">
-            <span
-              className="cursor-pointer inline-block opacity-30"
-            >
-            </span>
-          </div>
-          */}
           {
             lyric &&
             lyric.map((e:any) => {
               return (
-                <></>
+                <div className="my-[2px] mx-0 px-[18px] py-3 rounded-xl hover:bg-[color:var(--color-secondary-bg-for-transparent)] box-border">
+                  <span
+                    className="cursor-pointer inline-block opacity-30"
+                  >
+                    {e.data}
+                  </span>
+                </div>
               )
             })
           }
