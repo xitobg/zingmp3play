@@ -1,17 +1,17 @@
 import React from "react"
 import IconLyric from "../../Icons/Lyric"
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux"
-import { setOpenLyrics } from "../../../redux/features/audioSlice"
+import { setOpenLyric } from "../../../redux/features/audioSlice"
 
 const LyricControl:React.FC = () => {
 
-  const isLyrics = useAppSelector((state) => state.audio.isLyrics)
+  const isLyrics = useAppSelector((state) => state.audio.isLyric)
   const dispatch = useAppDispatch()
 
   const handleOpenLyrics = () => {
     isLyrics
-    ? dispatch(setOpenLyrics(false))
-    : dispatch(setOpenLyrics(true))
+    ? dispatch(setOpenLyric(false))
+    : dispatch(setOpenLyric(true))
   }
 
   return(
