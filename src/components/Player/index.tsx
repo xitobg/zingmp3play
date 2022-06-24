@@ -111,9 +111,9 @@ const Player:React.FC = () => {
       />
 
       {
-        isLyric
-        ? <Lyric />
-        : <></>
+      isLyric
+      ? <Lyric />
+      : ""
       }
 
     </>
