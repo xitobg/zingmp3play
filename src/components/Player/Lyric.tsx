@@ -44,14 +44,10 @@ const Lyric:React.FC = () => {
           {
             lyric &&
             lyric.map((e:any) => {
-              // {
-              //   console.log("1", formatTime(currentTime))
-              //   console.log("2", formatTime(e.startTime / 1000))
-              // }
               return (
-                <div className={"my-[2px] mx-0 px-[18px] py-3 rounded-xl hover:bg-[color:var(--color-secondary-bg-for-transparent)] box-border " + (formatTime(currentTime) === formatTime(e.startTime / 1000) ? "active__lyric" : "") }>
+                <div className="my-[2px] mx-0 px-[18px] py-3 rounded-xl hover:bg-[color:var(--color-secondary-bg-for-transparent)] box-border">
                   <span
-                    className="cursor-pointer inline-block opacity-30"
+                    className="cursor-pointer inline-block opacity-90"
                   >
                     {e.data}
                   </span>

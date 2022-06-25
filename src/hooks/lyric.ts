@@ -3,7 +3,7 @@ import { getLyric } from "../api/lyric"
 
 const useLyric = ( songId:string | null): any => {
 
-  const [lyr, setLyr] = useState<Array<{ data: string; startTime: number }>>()
+  const [lyr, setLyr] = useState<Array<{ data: string }>>()
 
   useEffect(() => {
     (
@@ -12,19 +12,16 @@ const useLyric = ( songId:string | null): any => {
 
           const dataLyric:any = await getLyric(songId)
 
-          let customLyr:Array<{ data: string; startTime: number }> = []
+          let customLyr:Array<{ data: string }> = []
 
-          dataLyric.sentences.forEach((e:any) => {
+          dataLyric.sentences &&
+          dataLyric.sentences.forEach((e:any, i:any) => {
             let lineLyric:string = ""
-            let eTime:any
+
             e.words.forEach((element:any, index:any) => {
               lineLyric = lineLyric + element.data + " "
-              if(index === 0) {
-                eTime = element.startTime
-              }
             })
             customLyr = customLyr.concat({
-              startTime: eTime,
               data: lineLyric
             })
           })

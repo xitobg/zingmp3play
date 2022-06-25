@@ -1,6 +1,7 @@
 import React from "react"
 import Slider from "../Slider"
 import { useAppSelector } from "../../../hooks/redux"
+import { formatTime } from "../../../utils/formatTime"
 
 const SongSliderControl: React.FC<{auRef: HTMLAudioElement | null | undefined}>  = ({ auRef }) => {
 
@@ -13,7 +14,7 @@ const SongSliderControl: React.FC<{auRef: HTMLAudioElement | null | undefined}> 
       setHeight={"2px"}
       percentSlider={(currentTime/duration)*100}
       toogleTooltip={true}
-      currentTimeSongTooltip={100}
+      currentTimeSongTooltip={currentTime}
       getPercentSlider={(value: number) => {
         if(auRef) {
           auRef.currentTime = (value / 100) * auRef.duration
