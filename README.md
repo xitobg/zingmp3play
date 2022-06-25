@@ -57,3 +57,6 @@ $ yarn start # npm run start
 
 
 ![Screenshot from 2022-06-25 14-13-33](https://user-images.githubusercontent.com/64464369/175762985-36c33cd4-3603-4cd4-a4a5-79dbc32b1bea.png)
+
+## CONTRIBUTING
+[CONTRIBUTING.md](https://github.com/phamhiep2506/music-player/blob/master/CONTRIBUTING.md)
