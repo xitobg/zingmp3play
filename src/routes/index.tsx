@@ -4,6 +4,7 @@ import Home from "../pages/Home"
 import Top100 from "../pages/Top100"
 import DetailPlaylist from "../pages/DetailPlaylist"
 import ChartHome from "../pages/ChartHome"
+import Artist from "../pages/Artist"
 import SearchResult from "../components/Navbar/SearchBox/SearchResult"
 
 const RouterPage: React.FC = () => {
@@ -18,6 +19,9 @@ const RouterPage: React.FC = () => {
       </ Route>
       <Route path="/playlist" element={<DetailPlaylist />}>
         <Route path=":playlistId" element={<DetailPlaylist />} />
+      </Route>
+      <Route path="/artist" element={<Artist />}>
+        <Route path=":name" element={<Artist />} />
       </Route>
     </Routes>
   )
