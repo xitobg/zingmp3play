@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { getCharthome } from "../api/zingchart"
 import TrackPlaylist from "../components/TrackPlaylist"
+import { useAppDispatch } from "../hooks/redux"
+import { setPlaylistSong } from "../redux/features/audioSlice"
 
 const ChartHome:React.FC = () => {
 
   const [dataChartHome, setDataChartHome] = useState<any>()
+
+  const dispatch = useAppDispatch()
+
 
   useEffect(() => {
     (
@@ -13,6 +18,9 @@ const ChartHome:React.FC = () => {
       }
     )()
   }, [])
+
+  dataChartHome &&
+  dispatch(setPlaylistSong(dataChartHome.RTChart.items))
 
   return (
     <>
