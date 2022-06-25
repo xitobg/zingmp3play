@@ -4,6 +4,8 @@ A music player use ZingMp3 API
 
 ## Live Demo
 Website:
+- [http://phamhiep2506.com](http://phamhiep2506.com)
+
 ## Main technology
 - [react](https://github.com/facebook/react)
 - [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
