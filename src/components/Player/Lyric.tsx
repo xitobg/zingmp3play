@@ -3,13 +3,11 @@ import { useAppSelector, useAppDispatch } from "../../hooks/redux"
 import { setOpenLyric } from "../../redux/features/audioSlice"
 import IconArrowDown from "../../components/Icons/ArrowDow"
 import useLyric from "../../hooks/lyric"
-import { formatTime } from "../../utils/formatTime"
 
 const Lyric:React.FC = () => {
 
   const isLyric = useAppSelector((state) => state.audio.isLyric)
   const songId = useAppSelector((state) => state.audio.songId)
-  const currentTime = useAppSelector((state) => state.audio.currentTime)
 
   // const [lyric, setLyric] = useState<Array<object> | undefined>()
 

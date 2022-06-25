@@ -1,9 +1,18 @@
 import React, { useState } from "react"
 import IconSearch from "../../Icons/Search"
+import { useNavigate } from "react-router-dom"
 
 const SearchBox: React.FC = () => {
 
-  const [ isActive, setActive ] = useState(false)
+  const navigate = useNavigate()
+
+  const [ isActive, setActive ] = useState<boolean>(false)
+  const [ keyword, setKeyword ] = useState<string>()
+
+  const handleSubmitForm = (e:any) => {
+    e.preventDefault()
+    navigate(`/search/${e.target[0].value}`)
+  }
 
   return (
     <div
@@ -27,17 +36,21 @@ const SearchBox: React.FC = () => {
         <IconSearch setColor="var(--color-text)" setWidth="15px" setHeight="15px"/>
       </div>
       {/* Input */}
-      <input
-        type="search"
-        placeholder={ isActive === false ? "Search" : "" }
-        className={`input_search text-[16px] text-[color:var(--color-text)] border-none bg-transparent font-semibold outline-none w-10/12
-            ${(isActive === false ? "opacity-25" : "")}
-          `
-        }
-        onFocus={ () => { setActive(!isActive) } }
-        onBlur={ () => { setActive(!isActive) } }
+      <form
+        method="GET"
+        onSubmit={handleSubmitForm}
       >
-      </input>
+        <input
+          type="search"
+          value={keyword}
+          placeholder={ isActive === false ? "Search" : "" }
+          className={ "input_search text-[16px] text-[color:var(--color-text)] border-none bg-transparent font-semibold outline-none w-10/12 " + (isActive === false ? "opacity-25" : "") }
+          onFocus={ () => { setActive(!isActive) } }
+          onBlur={ () => { setActive(!isActive) } }
+          onChange={e => setKeyword(e.target.value)}
+        >
+        </input>
+      </form>
     </div>
   )
 }

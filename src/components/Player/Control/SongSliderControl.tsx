@@ -1,7 +1,6 @@
 import React from "react"
 import Slider from "../Slider"
 import { useAppSelector } from "../../../hooks/redux"
-import { formatTime } from "../../../utils/formatTime"
 
 const SongSliderControl: React.FC<{auRef: HTMLAudioElement | null | undefined}>  = ({ auRef }) => {
 

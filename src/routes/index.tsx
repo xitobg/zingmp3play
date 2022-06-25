@@ -4,6 +4,7 @@ import Home from "../pages/Home"
 import Top100 from "../pages/Top100"
 import DetailPlaylist from "../pages/DetailPlaylist"
 import ChartHome from "../pages/ChartHome"
+import SearchResult from "../components/Navbar/SearchBox/SearchResult"
 
 const RouterPage: React.FC = () => {
   return (
@@ -12,6 +13,9 @@ const RouterPage: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/top100" element={<Top100 />} />
       <Route path="/zingchart" element={<ChartHome />} />
+      <Route path="/search" element={<SearchResult />}>
+        <Route path=":keyword" element={<SearchResult />} />
+      </ Route>
       <Route path="/playlist" element={<DetailPlaylist />}>
         <Route path=":playlistId" element={<DetailPlaylist />} />
       </Route>
