@@ -3,8 +3,10 @@
 A music player use ZingMp3 API
 
 ## Live Demo
-Website:
-- [http://phamhiep2506.com](http://phamhiep2506.com)
+### WEBSITE:
+- [https://music-player-one-steel.vercel.app](https://music-player-one-steel.vercel.app)
+### API:
+- [https://phamhiep2506.com](https://phamhiep2506.com)
 
 ## Main technology
 - [react](https://github.com/facebook/react)
