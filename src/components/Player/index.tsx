@@ -10,7 +10,6 @@ import {
   changeIconPlay,
 } from "../../redux/features/audioSlice"
 import { setSongId, setCurrnetIndexPlaylist } from "../../redux/features/audioSlice"
-import { AxiosResponse } from "axios"
 // import Lyric from "./Lyric"
 //
 interface songType {
@@ -40,7 +39,7 @@ const Player:React.FC = () => {
     (
       async () => {
         try {
-          if(songId == "") {
+          if(songId === "") {
             console.log("song id not found")
           } else {
             const linkSong:songType = await getSong(songId)
