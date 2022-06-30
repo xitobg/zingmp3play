@@ -54,3 +54,12 @@ body {
     transform: translateY(0%);
   }
 }
+
+@keyframes lyric-down {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}

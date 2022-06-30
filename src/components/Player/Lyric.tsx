@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import { useAppSelector, useAppDispatch } from "../../hooks/redux"
 import { setOpenLyric } from "../../redux/features/audioSlice"
 import IconArrowDown from "../../components/Icons/ArrowDow"
@@ -12,17 +12,30 @@ const Lyric:React.FC<{auRef: HTMLAudioElement | null}> = ({auRef}) => {
 
   const dispatch = useAppDispatch()
 
+  const lyrRef = useRef<HTMLDivElement>(null)
+
   const handleCloseLyric = () => {
-    isLyric
-    ? dispatch(setOpenLyric(false))
-    : dispatch(setOpenLyric(true))
+    if(isLyric) {
+      if(lyrRef.current) {
+        lyrRef.current.classList.remove("animate-[lyric-up_1s]")
+        lyrRef.current.classList.add("animate-[lyric-down_1s]")
+      }
+      setTimeout(() => {
+        dispatch(setOpenLyric(false))
+      }, 1000)
+    } else {
+      dispatch(setOpenLyric(true))
+    }
   }
 
   const lyric = useLyric(songId)
 
   return (
     <>
-      <div className={ "fixed inset-0 z-[200] bg-[color:var(--color-body-bg)] transition-all ease-linear duration-300 " + (isLyric ? "animate-[lyric-up_1s]" : "hidden")} >
+      <div
+        className={ "fixed inset-0 z-[200] bg-[color:var(--color-body-bg)] transition-all ease-linear duration-300 " + ( isLyric ? "animate-[lyric-up_1s]" : "hidden" )}
+        ref={lyrRef}
+      >
         {/* Close Button */}
         <button
           className="p-2 mx-3 my-3 bg-transparent rounded-[25%] transition-all duration-200 hover:bg-[color:var(--color-secondary-bg-for-transparent)] fixed top-6 right-6"

@@ -25,7 +25,6 @@ const Player:React.FC = () => {
   const songId = useAppSelector((state) => state.audio.songId)
   const srcAudio = useAppSelector((state) => state.audio.srcAudio)
   const isLoop = useAppSelector((state) => state.audio.isLoop)
-  const isLyric = useAppSelector((state) => state.audio.isLyric)
   const dispath = useAppDispatch()
 
   const currnetIndexPlaylist = useAppSelector((state) => state.audio.currnetIndexPlaylist)
@@ -125,11 +124,7 @@ const Player:React.FC = () => {
         }}
       />
 
-      {
-      isLyric
-      ? <Lyric auRef={audioRef.current}/>
-      : ""
-      }
+      <Lyric auRef={audioRef.current}/>
 
     </>
   )
