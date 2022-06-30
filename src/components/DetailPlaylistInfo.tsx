@@ -1,8 +1,17 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { detailPlaylistInfoProps } from "../utils/types"
 import IconPlay from "./Icons/Play"
 import IconHeart from "./Icons/Heart"
+
+interface detailPlaylistInfoProps {
+  thumbnailM: string
+  title: string
+  artists: []
+  total: string
+  description: string
+  like: number
+  contentLastUpdate: number
+}
 
 const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, artists, total, description, like, contentLastUpdate }) => {
 
@@ -40,9 +49,9 @@ const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, art
             Playlist by
             <span> </span>
             {
-              artists.map((e:any, i:any) => {
+              artists.map((e:{alias: string, name: string}, i:number) => {
                 return (
-                  <>
+                  <span key={i}>
                     {
                       (i > 0) ? (<span>, </span>) : ("")
                     }
@@ -52,7 +61,7 @@ const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, art
                     >
                       {e.name}
                     </Link>
-                  </>
+                  </span>
                 )
               })
             }

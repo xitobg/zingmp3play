@@ -1,26 +1,28 @@
 import axios from "../utils/axios"
 
-const getSong = async (id: string): Promise<any> => {
+const getSong = async (id: string) => {
   try {
-    return await axios.get("/song", {
+    const data = await axios.get<any, any>("/song", {
         params: {
           id: id
         }
       }
     )
+    return data
   } catch(err) {
     console.log(err)
   }
 }
 
-const getInfoSong = async (id: string): Promise<any> => {
+const getInfoSong = async (id: string) => {
   try {
-    return await axios.get("/infosong", {
+    const data = await axios.get<any, any>("/infosong", {
         params: {
           id: id
         }
       }
     )
+    return data
   } catch(err) {
     console.log(err)
   }

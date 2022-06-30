@@ -1,12 +1,13 @@
 import axios from "../utils/axios"
 
-const getSearch = async (keyword: string): Promise<any> => {
+const getSearch = async (keyword: string) => {
   try {
-    return await axios.get("/search", {
+    const data = await axios.get("/search", {
       params: {
         keyword: keyword
       }
     })
+    return data
   } catch(err) {
     console.log(err)
   }

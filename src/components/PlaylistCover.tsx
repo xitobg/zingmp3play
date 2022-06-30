@@ -1,6 +1,12 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { coverProps } from "../utils/types"
+
+interface coverProps {
+  title: string
+  sortDescription?: string
+  thumbnail: string
+  link: string
+}
 
 const Cover: React.FC<coverProps> = ({ title, sortDescription, thumbnail, link }) => {
 

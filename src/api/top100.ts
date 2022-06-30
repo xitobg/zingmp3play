@@ -1,8 +1,9 @@
 import axios from "../utils/axios"
 
-const getTop100 = async (): Promise<any> => {
+const getTop100 = async () => {
   try {
-    return await axios.get("/top100")
+    const data = await axios.get<any, any>("/top100")
+    return data
   } catch(err) {
     console.log(err)
   }

@@ -6,6 +6,12 @@ import TrackListDetailPlaylist from "../components/TrackPlaylist"
 import { useAppDispatch } from "../hooks/redux"
 import { setPlaylistSong } from "../redux/features/audioSlice"
 
+interface playlistType {
+  song: {
+    items: []
+  }
+}
+
 const Playlist: React.FC = () => {
 
   const [dataDetailPlaylist, setDataDetailPlaylist] = useState<any>()
@@ -17,7 +23,7 @@ const Playlist: React.FC = () => {
   useEffect(() => {
     (
       async () => {
-        const detailPlaylist = await getDetailPlaylist(params.playlistId)
+        const detailPlaylist:playlistType = await getDetailPlaylist(params.playlistId)
         setDataDetailPlaylist(detailPlaylist)
         dispatch(setPlaylistSong(detailPlaylist.song.items))
       }

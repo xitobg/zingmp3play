@@ -1,8 +1,9 @@
 import axios from "../utils/axios"
 
-const getCharthome = async (): Promise<any> => {
+const getCharthome = async () => {
   try {
-    return await axios.get("/charthome")
+    const data = await axios.get("/charthome")
+    return data
   } catch(err) {
     console.log(err)
   }

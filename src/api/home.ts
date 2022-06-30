@@ -1,15 +1,14 @@
 import axios from "../utils/axios"
 
-interface typesData {
-  items: {
-    sectionType: string
-  }[]
+interface dataType {
+  items: []
+  sectionType: string
 }
 
-const getHomePlayList = async (): Promise<Array<object> | undefined> => {
+const getHomePlayList = async () => {
   try {
-    const data:typesData =  await axios.get("/home")
-    return data.items.filter((e:any) => e.sectionType === "playlist" )
+    const data:dataType =  await axios.get("/home")
+    return data.items.filter((e:dataType) => e.sectionType === "playlist" )
   } catch(err) {
     console.log(err)
   }

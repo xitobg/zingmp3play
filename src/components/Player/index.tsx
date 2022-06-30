@@ -10,14 +10,23 @@ import {
   changeIconPlay,
 } from "../../redux/features/audioSlice"
 import { setSongId, setCurrnetIndexPlaylist } from "../../redux/features/audioSlice"
-import Lyric from "./Lyric"
+import { AxiosResponse } from "axios"
+// import Lyric from "./Lyric"
+//
+interface songType {
+  [key: number]: string
+  title: string
+  infoSong: string
+  thumbnail: string
+  artistsNames: string
+}
 
 const Player:React.FC = () => {
 
   const songId = useAppSelector((state) => state.audio.songId)
   const srcAudio = useAppSelector((state) => state.audio.srcAudio)
   const isLoop = useAppSelector((state) => state.audio.isLoop)
-  const isLyric = useAppSelector((state) => state.audio.isLyric)
+  // const isLyric = useAppSelector((state) => state.audio.isLyric)
   const dispath = useAppDispatch()
 
   const currnetIndexPlaylist = useAppSelector((state) => state.audio.currnetIndexPlaylist)
@@ -30,17 +39,24 @@ const Player:React.FC = () => {
   useEffect(() => {
     (
       async () => {
-        if(songId !== null && songId !== "") {
-          const src = await getSong(songId)
-          src[128] ? dispath(setSrcAudio( src[128] )) : dispath(setSrcAudio(""))
-          const infoSong = await getInfoSong(songId)
-          dispath(setInfoSongPlayer(
-            {
-              title: infoSong.title,
-              thumbnail: infoSong.thumbnail,
-              artistsNames: infoSong.artistsNames,
-            }
-          ))
+        try {
+          if(songId == "") {
+            console.log("song id not found")
+          } else {
+            const linkSong:songType = await getSong(songId)
+            linkSong[128] ? dispath(setSrcAudio( linkSong[128] )) : dispath(setSrcAudio(""))
+
+            const infoSong:songType = await getInfoSong(songId)
+            dispath(setInfoSongPlayer(
+              {
+                title: infoSong.title,
+                thumbnail: infoSong.thumbnail,
+                artistsNames: infoSong.artistsNames,
+              }
+            ))
+          }
+        } catch(err) {
+          console.log(err)
         }
       }
     )()
@@ -110,11 +126,11 @@ const Player:React.FC = () => {
         }}
       />
 
-      {
+      { /* {
       isLyric
       ? <Lyric />
       : ""
-      }
+      } */ }
 
     </>
   )

@@ -2,6 +2,15 @@ import React, { useState, useEffect } from "react"
 import PlaylistCover from "../components/PlaylistCover"
 import { getHomePlayList } from "../api/home"
 
+interface typePlaylistCover{
+  items: []
+  title: string
+  encodeId: string
+  thumbnail: string
+  sortDescription: string
+  sectionId: string
+}
+
 const Home: React.FC = () => {
 
   const [dataHome, setdataHome] = useState<Array<object> | undefined>()
@@ -21,8 +30,8 @@ const Home: React.FC = () => {
         <div className="mt-8">
           {
             dataHome &&
-            dataHome.map((e: any, i: any) => (
-              <>
+            dataHome.map((e: any, i: number) => (
+              <div key={i}>
                 <div
                   className="flex justify-between items-end text-[28px] font-bold text-[color:var(--color-text)] mt-9 mb-3 uppercase">
                   {(e.title === "") ? (e.sectionId.slice(1)) : (e.title)}
@@ -30,8 +39,9 @@ const Home: React.FC = () => {
                 <div
                   className="grid grid-cols-5 gap-x-6 gap-y-11">
                   {
-                    e.items.map((element: any, index: any) => (
+                    e.items.map((element: typePlaylistCover, index: number) => (
                       <PlaylistCover
+                        key={index}
                         title={element.title}
                         link={`/playlist/${element.encodeId}`}
                         thumbnail={element.thumbnail}
@@ -40,7 +50,7 @@ const Home: React.FC = () => {
                     ))
                   }
                 </div>
-              </>
+              </div>
             ))
           }
         </div>

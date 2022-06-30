@@ -1,13 +1,14 @@
 import axios from "../utils/axios"
 
-const getDetailPlaylist = async (id: string): Promise<any> => {
+const getDetailPlaylist = async (id: string) => {
   try {
-    return await axios.get("/detailplaylist", {
+    const data = await axios.get<any, any>("/detailplaylist", {
         params: {
           id: id
         }
       }
     )
+    return data
   } catch(err) {
     console.log(err)
   }

@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 interface AudioState {
   isPlay: boolean
   isMute: boolean
-  songId: string | null
+  songId: string
   currnetIndexPlaylist: number
   infoSongPlayer: object
   srcAudio: string
@@ -19,7 +19,7 @@ interface AudioState {
 const initialState: AudioState = {
   isPlay: false,
   isMute: false,
-  songId: localStorage.getItem("songId"),
+  songId: localStorage.getItem("songId") || "",
   currnetIndexPlaylist: 0,
   infoSongPlayer: {
     title: "",

@@ -1,6 +1,10 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
-import { navLinksProps } from "../../utils/types"
+
+interface navLinksProps {
+  toLink?: string
+  titleLink: string
+}
 
 const NavLinks: React.FC<navLinksProps> = ({ toLink, titleLink })=> {
   return (
