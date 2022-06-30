@@ -21,17 +21,18 @@ const Top100: React.FC = () => {
         <div className="mt-8">
           {
             dataTop100 &&
-            dataTop100.map((e: any, i: any) => (
-              <>
+            dataTop100.map((e: any, i: number) => (
+              <div key={i}>
                 <div
                   className="flex justify-between items-end text-[28px] font-bold text-[color:var(--color-text)] mt-9 mb-3 uppercase">
-                  {(e.title === "") ? (e.sectionId.slice(1)) : (e.title)}
+                  {e.title}
                 </div>
                 <div
                   className="grid grid-cols-5 gap-x-6 gap-y-11">
                   {
-                    e.items.map((element: any, index: any) => (
+                    e.items.map((element: {title: string, encodeId: string, thumbnail: string, sortDescription: string}, index: number) => (
                       <PlaylistCover
+                        key={index}
                         title={element.title}
                         link={`/playlist/${element.encodeId}`}
                         thumbnail={element.thumbnail}
@@ -40,7 +41,7 @@ const Top100: React.FC = () => {
                     ))
                   }
                 </div>
-              </>
+              </div>
             ))
           }
         </div>

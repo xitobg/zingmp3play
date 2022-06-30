@@ -7,25 +7,34 @@ import { useAppDispatch } from "../hooks/redux"
 import { setPlaylistSong } from "../redux/features/audioSlice"
 
 interface playlistType {
+  thumbnailM: string
+  title: string
+  artists: []
+  description: string
+  like: number
+  contentLastUpdate: number
   song: {
+    total: string
     items: []
   }
 }
 
 const Playlist: React.FC = () => {
 
-  const [dataDetailPlaylist, setDataDetailPlaylist] = useState<any>()
+  const [dataDetailPlaylist, setDataDetailPlaylist] = useState<playlistType>()
 
-  const params:any = useParams()
+  const params = useParams<{playlistId: string}>()
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     (
       async () => {
-        const detailPlaylist:playlistType = await getDetailPlaylist(params.playlistId)
-        setDataDetailPlaylist(detailPlaylist)
-        dispatch(setPlaylistSong(detailPlaylist.song.items))
+        if(params.playlistId) {
+          const detailPlaylist:playlistType = await getDetailPlaylist(params.playlistId)
+          setDataDetailPlaylist(detailPlaylist)
+          dispatch(setPlaylistSong(detailPlaylist.song.items))
+        }
       }
     )()
   }, [params, dispatch])

@@ -2,7 +2,7 @@ import axios from "../utils/axios"
 
 const getArtist = async (name: string) => {
   try {
-    const data = await axios.get("/artist", {
+    const data = await axios.get<any, any>("/artist", {
       params: {
         name: name
       }
