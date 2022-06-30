@@ -10,7 +10,7 @@ import {
   changeIconPlay,
 } from "../../redux/features/audioSlice"
 import { setSongId, setCurrnetIndexPlaylist } from "../../redux/features/audioSlice"
-// import Lyric from "./Lyric"
+import Lyric from "./Lyric"
 //
 interface songType {
   [key: number]: string
@@ -25,7 +25,7 @@ const Player:React.FC = () => {
   const songId = useAppSelector((state) => state.audio.songId)
   const srcAudio = useAppSelector((state) => state.audio.srcAudio)
   const isLoop = useAppSelector((state) => state.audio.isLoop)
-  // const isLyric = useAppSelector((state) => state.audio.isLyric)
+  const isLyric = useAppSelector((state) => state.audio.isLyric)
   const dispath = useAppDispatch()
 
   const currnetIndexPlaylist = useAppSelector((state) => state.audio.currnetIndexPlaylist)
@@ -125,11 +125,11 @@ const Player:React.FC = () => {
         }}
       />
 
-      { /* {
+      {
       isLyric
-      ? <Lyric />
+      ? <Lyric auRef={audioRef.current}/>
       : ""
-      } */ }
+      }
 
     </>
   )

@@ -12,16 +12,26 @@ const useLyric = ( songId:string | null): any => {
 
           const dataLyric:any = await getLyric(songId)
 
-          let customLyr:Array<{ data: string }> = []
+          let customLyr:{ startTime: number, endTime: number,data: string }[] = []
 
           dataLyric.sentences &&
-          dataLyric.sentences.forEach((e:any, i:any) => {
+          dataLyric.sentences.forEach((e:{words: []}, i:number) => {
             let lineLyric:string = ""
+            let sTime: number = 0
+            let eTime: number = 0
 
-            e.words.forEach((element:any, index:any) => {
+            e.words.forEach((element: {data: string, startTime: number, endTime: number}, index:number) => {
+              if(index === 0) {
+                sTime = element.startTime
+              }
+              if(index === e.words.length - 1) {
+                eTime = element.endTime
+              }
               lineLyric = lineLyric + element.data + " "
             })
-            customLyr = customLyr.concat({
+            customLyr.push({
+              startTime: sTime,
+              endTime: eTime,
               data: lineLyric
             })
           })
