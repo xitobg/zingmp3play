@@ -47,7 +47,7 @@ const Lyric:React.FC<{auRef: HTMLAudioElement | null}> = ({auRef}) => {
         {/* End Close Button */}
 
         {/* Lyric */}
-        <div className="font-semibold text-[28px] text-[color:var(--color-text)] max-w-2xl mx-auto my-0 h-full flex flex-col overflow-y-auto">
+        <div className="font-semibold text-[28px] text-[color:var(--color-text)] max-w-2xl mx-auto my-0 h-full flex flex-col overflow-y-auto overflow-x-hidden">
 
           <div className="mt-[50vh]"></div>
           {/* Line Lyric */}
