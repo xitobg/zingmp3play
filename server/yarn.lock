@@ -1191,9 +1191,9 @@ yallist@^4.0.0:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-zingmp3-api-full@^1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/zingmp3-api-full/-/zingmp3-api-full-1.0.13.tgz#52c14bf895742d7452b781dd09ff646db4b75259"
-  integrity sha512-rpcLmX3bC69APNVPkPHRxLkoJduukfnFRPNEfHpmZRC6/RkujcTZtMbFCM6iOox/kGFBezH9bThxYot7LsdSig==
+zingmp3-api-full@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/zingmp3-api-full/-/zingmp3-api-full-1.0.14.tgz#ed70e4ea07cbf464c6fa963845798d6c7b7f5214"
+  integrity sha512-j7IjI6Igi8v0YwC0AMIiU5tatkCbiGXC5lcGlF3LQxWFCOwDSDEmLPBIfK/TcJU3XUgODEJykgeaer2DFt4M8A==
   dependencies:
     axios "^0.24.0"

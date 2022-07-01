@@ -50,6 +50,12 @@ class ZingController {
     })
   }
 
+  getArtistSong(req, res) {
+    ZingMp3.getListArtistSong(req.query.id, req.query.page, req.query.count).then((data) => {
+      res.json(data)
+    })
+  }
+
   getLyric(req, res) {
     ZingMp3.getLyric(req.query.id).then((data) => {
       res.json(data)

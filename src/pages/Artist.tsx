@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { getArtist } from "../api/artist"
 import { useParams } from "react-router-dom"
 import DetailArtistInfo from "../components/DetailArtistInfo"
+import PlaylistCover from "../components/PlaylistCover"
 
 interface artistType {
   name: string
@@ -27,8 +28,6 @@ const Artist: React.FC = () => {
       }
     )()
   }, [params])
-
-  console.log(dataDetailArtist)
 
   return(
     <>

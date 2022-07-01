@@ -27,6 +27,9 @@ router.get("/infosong", ZingController.getInfo)
 // getArtist
 router.get("/artist", ZingController.getArtist)
 
+// getArtistSong
+router.get("/artistsong", ZingController.getArtistSong)
+
 // getLyric
 router.get("/lyric", ZingController.getLyric)
 

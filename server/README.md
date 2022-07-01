@@ -39,6 +39,9 @@ $ yarn start # npm run start
 ### Get Artist:
 > http://localhost:3000/api/artist?name={param-name}
 
+### Get Artist Song:
+> http://localhost:3000/api/artistsong?name={param-id, page, count}
+
 ### Get Lyric:
 > http://localhost:3000/api/lyric?id={param-id-song}
 
