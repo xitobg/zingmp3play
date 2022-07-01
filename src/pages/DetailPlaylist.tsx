@@ -5,6 +5,7 @@ import DetailPlaylistInfo from "../components/DetailPlaylistInfo"
 import TrackListDetailPlaylist from "../components/TrackPlaylist"
 import { useAppDispatch } from "../hooks/redux"
 import { setPlaylistSong } from "../redux/features/audioSlice"
+import Loading from "../components/Loading"
 
 interface playlistType {
   thumbnailM: string
@@ -44,7 +45,8 @@ const Playlist: React.FC = () => {
       {/* {console.log(dataDetailPlaylist)} */}
       <div className="mx-[10vw] mt-16 mb-24">
         {
-          dataDetailPlaylist &&
+          dataDetailPlaylist
+          ?
           <>
             <DetailPlaylistInfo
               thumbnailM={dataDetailPlaylist.thumbnailM}
@@ -57,6 +59,8 @@ const Playlist: React.FC = () => {
             />
             <TrackListDetailPlaylist items={dataDetailPlaylist.song.items}/>
           </>
+          :
+          <Loading />
         }
       </div>
     </>

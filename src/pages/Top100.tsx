@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { getTop100 } from "../api/top100"
 import PlaylistCover from "../components/PlaylistCover"
+import Loading from "../components/Loading"
 
 const Top100: React.FC = () => {
 
@@ -20,7 +21,8 @@ const Top100: React.FC = () => {
         {/* Playlist */}
         <div className="mt-8">
           {
-            dataTop100 &&
+            dataTop100
+            ?
             dataTop100.map((e: any, i: number) => (
               <div key={i}>
                 <div
@@ -43,6 +45,8 @@ const Top100: React.FC = () => {
                 </div>
               </div>
             ))
+            :
+            <Loading />
           }
         </div>
         {/* End Playlist */}

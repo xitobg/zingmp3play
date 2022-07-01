@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react"
-import { getArtist } from "../api/artist"
+import { getArtist, getArtistSong } from "../api/artist"
 import { useParams } from "react-router-dom"
 import DetailArtistInfo from "../components/DetailArtistInfo"
-import PlaylistCover from "../components/PlaylistCover"
+import TrackPlaylist from "../components/TrackPlaylist"
+import Loading from "../components/Loading"
+import {useAppDispatch} from "../hooks/redux"
+import { setPlaylistSong } from "../redux/features/audioSlice"
 
 interface artistType {
+  id: string
   name: string
   thumbnailM: string
   sortBiography: string
   realname: string
   birthday: string
   totalFollow: number
+  items: []
 }
 
 const Artist: React.FC = () => {
 
   const params = useParams<{name: string}>()
   const [dataDetailArtist, setDataDetailArtist] = useState<artistType>()
+  const [dataListArtistSong, setDataListArtistSong] = useState<artistType>()
+
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     (
@@ -27,13 +35,26 @@ const Artist: React.FC = () => {
         }
       }
     )()
-  }, [params])
+  }, [params.name])
+
+  useEffect(() => {
+    (
+      async () => {
+        if(dataDetailArtist) {
+          const data = await getArtistSong(dataDetailArtist.id, "1", "200")
+          setDataListArtistSong(data)
+          dispatch(setPlaylistSong(data.items))
+        }
+      }
+    )()
+  }, [dataDetailArtist, dispatch])
 
   return(
     <>
       <div className="mx-[10vw] mt-16 mb-24">
         {
-          dataDetailArtist &&
+          dataDetailArtist
+          ?
           <>
             <DetailArtistInfo
               name={dataDetailArtist.name}
@@ -43,7 +64,13 @@ const Artist: React.FC = () => {
               birthday={dataDetailArtist.birthday}
               totalFollow={dataDetailArtist.totalFollow}
             />
+            {
+              dataListArtistSong &&
+              <TrackPlaylist items={dataListArtistSong.items}/>
+            }
           </>
+          :
+          <Loading />
         }
       </div>
     </>

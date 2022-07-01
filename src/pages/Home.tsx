@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import PlaylistCover from "../components/PlaylistCover"
 import { getHomePlayList } from "../api/home"
+import Loading from "../components/Loading"
 
 interface typePlaylistCover{
   items: []
@@ -29,7 +30,8 @@ const Home: React.FC = () => {
         {/* Playlist */}
         <div className="mt-8">
           {
-            dataHome &&
+            dataHome
+            ?
             dataHome.map((e: any, i: number) => (
               <div key={i}>
                 <div
@@ -52,6 +54,8 @@ const Home: React.FC = () => {
                 </div>
               </div>
             ))
+            :
+            <Loading />
           }
         </div>
         {/* End Playlist */}

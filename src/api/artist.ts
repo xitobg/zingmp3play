@@ -13,5 +13,20 @@ const getArtist = async (name: string) => {
   }
 }
 
-export { getArtist }
+const getArtistSong = async (artistId: string, page: string, count: string) => {
+  try {
+    const data = await axios.get<any, any>("/artistsong", {
+      params: {
+        id: artistId,
+        page: page,
+        count: count,
+      }
+    })
+    return data
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+export { getArtist, getArtistSong }
 

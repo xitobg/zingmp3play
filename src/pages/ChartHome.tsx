@@ -3,6 +3,7 @@ import { getCharthome } from "../api/zingchart"
 import TrackPlaylist from "../components/TrackPlaylist"
 import { useAppDispatch } from "../hooks/redux"
 import { setPlaylistSong } from "../redux/features/audioSlice"
+import Loading from "../components/Loading"
 
 const ChartHome:React.FC = () => {
 
@@ -27,8 +28,11 @@ const ChartHome:React.FC = () => {
       <main className="inset-0 box-border pt-[64px] pb-[96px] px-[10vw]">
         <div className="mt-8">
           {
-            dataChartHome &&
+            dataChartHome
+            ?
             <TrackPlaylist items={dataChartHome.RTChart.items}/>
+            :
+            <Loading />
           }
         </div>
       </main>

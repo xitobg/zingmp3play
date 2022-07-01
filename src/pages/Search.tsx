@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getSearch } from "../../../api/search"
-import TrackPlaylist from "../../TrackPlaylist"
+import { getSearch } from "../api/search"
+import TrackPlaylist from "../components/TrackPlaylist"
 
-const SearchResult: React.FC = () => {
+const Search: React.FC = () => {
 
   const params:any = useParams()
 
@@ -33,4 +33,4 @@ const SearchResult: React.FC = () => {
   )
 }
 
-export default SearchResult
+export default Search
