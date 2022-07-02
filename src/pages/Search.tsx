@@ -17,8 +17,6 @@ const Search: React.FC = () => {
     )()
   }, [params])
 
-  console.log(dataSearch)
-
   return (
     <>
       <main className="inset-0 box-border pt-[64px] pb-[96px] px-[10vw]">
