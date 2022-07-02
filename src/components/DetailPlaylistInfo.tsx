@@ -49,6 +49,7 @@ const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, art
             Playlist by
             <span> </span>
             {
+              artists &&
               artists.map((e:{alias: string, name: string}, i:number) => {
                 return (
                   <span key={i}>
