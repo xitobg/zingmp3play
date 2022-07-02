@@ -6,6 +6,7 @@ import DetailPlaylist from "../pages/DetailPlaylist"
 import ChartHome from "../pages/ChartHome"
 import Artist from "../pages/Artist"
 import Search from "../pages/Search"
+import MV from "../pages/MV"
 
 const RouterPage: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const RouterPage: React.FC = () => {
       <Route path="/artist" element={<Artist />}>
         <Route path=":name" element={<Artist />} />
       </Route>
+      <Route path="/mv" element={<MV />} />
     </Routes>
   )
 }

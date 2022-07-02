@@ -5,7 +5,12 @@ interface AudioState {
   isMute: boolean
   songId: string
   currnetIndexPlaylist: number
-  infoSongPlayer: object
+  infoSongPlayer: {
+    title: string
+    thumbnail: string,
+    artistsNames: string,
+    artists: Array<object>
+  }
   srcAudio: string
   currentTime: number
   duration: number
@@ -25,6 +30,7 @@ const initialState: AudioState = {
     title: "",
     thumbnail: "",
     artistsNames: "",
+    artists: [],
   },
   srcAudio: "",
   currentTime: 0,
@@ -51,7 +57,10 @@ const audioSlice = createSlice({
       localStorage.setItem("songId", action.payload)
     },
     setInfoSongPlayer: (state, action: PayloadAction<object>) => {
-      state.infoSongPlayer = { ...action.payload }
+      state.infoSongPlayer = {
+        ...state.infoSongPlayer,
+        ...action.payload
+      }
     },
     setSrcAudio: (state, action: PayloadAction<string>) => {
       state.srcAudio = action.payload

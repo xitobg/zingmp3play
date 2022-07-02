@@ -65,8 +65,11 @@ const Artist: React.FC = () => {
               totalFollow={dataDetailArtist.totalFollow}
             />
             {
-              dataListArtistSong &&
+              dataListArtistSong
+              ?
               <TrackPlaylist items={dataListArtistSong.items}/>
+              :
+              <Loading />
             }
           </>
           :

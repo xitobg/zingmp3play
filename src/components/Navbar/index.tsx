@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
         <NavLinks toLink="/" titleLink="Home" />
         <NavLinks toLink="/zingchart" titleLink="ZingChart" />
         <NavLinks toLink="/top100" titleLink="Top100" />
-        {/* <NavLinks toLink="/mv" titleLink="MV" /> */}
+        <NavLinks toLink="/mv" titleLink="MV" />
       </div>
       {/* End Navigation Links */}
 
