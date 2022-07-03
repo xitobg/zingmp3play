@@ -46,7 +46,6 @@ const Player:React.FC = () => {
             linkSong[128] ? dispath(setSrcAudio( linkSong[128] )) : dispath(setSrcAudio(""))
 
             const infoSong:songType = await getInfoSong(songId)
-            console.log(infoSong)
             dispath(setInfoSongPlayer(
               {
                 title: infoSong.title,
