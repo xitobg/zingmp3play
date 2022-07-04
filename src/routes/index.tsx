@@ -24,7 +24,9 @@ const RouterPage: React.FC = () => {
       <Route path="/artist" element={<Artist />}>
         <Route path=":name" element={<Artist />} />
       </Route>
-      <Route path="/mv" element={<MV />} />
+      <Route path="/mv" element={<MV />} >
+        <Route path=":id" element={<MV />} />
+      </Route>
     </Routes>
   )
 }
