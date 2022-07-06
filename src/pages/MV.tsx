@@ -1,53 +1,24 @@
-import React, { useEffect, useState } from "react"
-import ReactPlayer from 'react-player'
-import { getMV } from "../api/mv"
+import React from "react"
 import { useParams } from "react-router-dom"
+import VideoPlayer from "../components/VideoPlayer"
+import DetailMV from "../components/DetailMV"
 
 const MV:React.FC = () => {
 
   const params = useParams<{id: string}>()
 
-  const [dataUrl, setDataUrl] = useState<{"360p": string, "480p": string, "720p": string}>()
-  const [url, setUrl] = useState<string>()
-
-  useEffect(() => {
-    (
-      async () => {
-        const data:any = await getMV(`${params.id}`)
-        setDataUrl(data.streaming.hls)
-      }
-    )()
-  }, [params])
-
   return (
-    <div className="mt-8 w-full h-full rounded-2xl">
-      <ReactPlayer
-        url={
-          url || dataUrl?.["720p"]
-        }
-        controls={true}
-      />
-      <button
-        onClick={() => {
-          setUrl(dataUrl?.["360p"])
-        }}
-      >
-        360p
-      </button>
-      <button
-        onClick={() => {
-          setUrl(dataUrl?.["480p"])
-        }}
-      >
-        480p
-      </button>
-      <button
-        onClick={() => {
-          setUrl(dataUrl?.["720p"])
-        }}
-      >
-        720p
-      </button>
+    <div className="pt-[65px] pb-[96px] px-[10vw]">
+      {
+        params.id &&
+        <VideoPlayer id={params.id}/>
+      }
+
+      <DetailMV />
+
+      <span className="text-[color:var(--color-text)] flex justify-center text-3xl font-medium">
+        Tính năng đang phát triển
+      </span>
     </div>
   )
 }
