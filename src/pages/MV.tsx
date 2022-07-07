@@ -17,7 +17,7 @@ const MV:React.FC = () => {
         setDataListMV(data.items)
       }
     )()
-  }, [])
+  }, [page])
 
   const fetchMoreDataListMV = () => {
     setPage(page + 1);

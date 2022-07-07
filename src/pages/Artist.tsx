@@ -49,7 +49,7 @@ const Artist: React.FC = () => {
         }
       }
     )()
-  }, [dataDetailArtist, dispatch])
+  }, [dataDetailArtist, dispatch, page])
 
   const fetchMoreDataSongArtist = () => {
     setPage(page + 1);
