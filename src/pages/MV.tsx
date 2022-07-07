@@ -13,11 +13,11 @@ const MV:React.FC = () => {
   useEffect(() => {
     (
       async () => {
-        const data: {items: []} = await getlistMV("IWZ9Z08I", page, 20)
+        const data: {items: []} = await getlistMV("IWZ9Z08I", 1, 20)
         setDataListMV(data.items)
       }
     )()
-  }, [page])
+  }, [])
 
   const fetchMoreDataListMV = () => {
     setPage(page + 1);

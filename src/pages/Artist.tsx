@@ -43,13 +43,13 @@ const Artist: React.FC = () => {
     (
       async () => {
         if(dataDetailArtist) {
-          const data = await getArtistSong(dataDetailArtist.id, page, 20)
+          const data = await getArtistSong(dataDetailArtist.id, 1, 20)
           setDataListArtistSong(data)
           dispatch(setPlaylistSong(data.items))
         }
       }
     )()
-  }, [dataDetailArtist, dispatch, page])
+  }, [dataDetailArtist, dispatch])
 
   const fetchMoreDataSongArtist = () => {
     setPage(page + 1);
