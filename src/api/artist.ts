@@ -13,7 +13,7 @@ const getArtist = async (name: string) => {
   }
 }
 
-const getArtistSong = async (artistId: string, page: string, count: string) => {
+const getArtistSong = async (artistId: string, page: number, count: number) => {
   try {
     const data = await axios.get<any, any>("/artistsong", {
       params: {

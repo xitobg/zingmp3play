@@ -13,7 +13,7 @@ const getMV = async (id: string) => {
   }
 }
 
-const getlistMV = async (id: number, page: number, count: number) => {
+const getlistMV = async (id: string, page: number, count: number) => {
   try {
     const data = await axios.get<any, any>("/listmv", {
       params: {
