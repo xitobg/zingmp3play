@@ -7,6 +7,7 @@ import ChartHome from "../pages/ChartHome"
 import Artist from "../pages/Artist"
 import Search from "../pages/Search"
 import MV from "../pages/MV"
+import DetailMV from "../pages/DetailMV"
 
 const RouterPage: React.FC = () => {
   return (
@@ -24,9 +25,8 @@ const RouterPage: React.FC = () => {
       <Route path="/artist" element={<Artist />}>
         <Route path=":name" element={<Artist />} />
       </Route>
-      <Route path="/mv" element={<MV />} >
-        <Route path=":id" element={<MV />} />
-      </Route>
+      <Route path="/mv" element={<MV />} />
+      <Route path="/mv/:id" element={<DetailMV />} />
     </Routes>
   )
 }
