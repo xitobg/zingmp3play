@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({
-  baseURL: 'https://musictes.vercel.app/api',
+  baseURL: 'https://server-tau-six.vercel.app/api/',
 })
 
 // custom response
